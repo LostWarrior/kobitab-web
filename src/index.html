@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>KobiTab | Your bookmarks, smarter and strictly private.</title>
+    <meta name="description" content="A local-first bookmark manager with built-in AI. Privacy-focused, RAG-powered, and built for macOS." />
+    <link rel="canonical" href="https://kobitab.com/" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kobitab.com/" />
+    <meta property="og:title" content="KobiTab | Intelligence, locally grown." />
+    <meta property="og:description" content="A local-first bookmark manager with built-in AI. Privacy-focused, RAG-powered, and built for macOS." />
+    <meta property="og:site_name" content="KobiTab" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="KobiTab | Intelligence, locally grown." />
+    <meta name="twitter:description" content="A local-first bookmark manager with built-in AI. Privacy-focused, RAG-powered, and built for macOS." />
+
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://api.github.com 'self'; img-src 'self' data:;" />
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;700&family=Outfit:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="background-blobs" aria-hidden="true">
+      <div class="blob blob-1"></div>
+      <div class="blob blob-2"></div>
+    </div>
+
+    <nav class="nav glass-effect">
+      <div class="nav-content container">
+        <a href="/" class="brand">KobiTab</a>
+        <div class="nav-links">
+          <a href="https://github.com/__GITHUB_REPOSITORY__" target="_blank" rel="noopener noreferrer">GitHub Project</a>
+        </div>
+      </div>
+    </nav>
+
+    <main class="container">
+      <section class="hero">
+        <div class="badge">macOS • Private • Local AI</div>
+        <h1 class="headline">Intelligence,<br><span class="accent-text">locally grown.</span></h1>
+        <p class="subheadline">
+          The privacy-first bookmark manager that brings RAG-powered chat and smart summaries to your machine. No cloud, no tracking.
+        </p>
+        
+        <div class="hero-actions">
+          <a id="download-dmg-link" href="https://github.com/__GITHUB_REPOSITORY__/releases/latest" class="btn btn-primary">
+            Download for macOS
+          </a>
+          <a href="#setup" class="btn btn-secondary">Setup Guide</a>
+        </div>
+        
+        <p id="asset-status" class="status-text">Loading latest release metadata...</p>
+      </section>
+
+      <div class="bento-grid">
+        <article class="card glass-effect">
+          <div style="font-size: 2rem; margin-bottom: 1rem;">🛡️</div>
+          <h3>Strictly Local</h3>
+          <p style="font-size: 0.95rem; color: var(--text-secondary);">Your bookmarks stay in a local SQLite database. We never see your data.</p>
+        </article>
+        <article class="card glass-effect">
+          <div style="font-size: 2rem; margin-bottom: 1rem;">🧠</div>
+          <h3>Local Intelligence</h3>
+          <p style="font-size: 0.95rem; color: var(--text-secondary);">Powered by Ollama. Summarize and chat with your links without leaving your network.</p>
+        </article>
+        <article class="card glass-effect">
+          <div style="font-size: 2rem; margin-bottom: 1rem;">🔄</div>
+          <h3>Native Sync</h3>
+          <p style="font-size: 0.95rem; color: var(--text-secondary);">Ingest bookmarks from Chrome and Firefox automatically. No manual export needed.</p>
+        </article>
+      </div>
+
+      <section id="setup" class="setup-card card glass-effect">
+        <div>
+          <h2 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 1.5rem;">One-Minute Setup</h2>
+          <div class="setup-steps">
+            <div class="step">
+              <span class="step-num">1</span>
+              <div class="step-content">
+                <strong>Install Ollama</strong>
+                <p>Download from <a href="https://ollama.com" target="_blank">ollama.com</a> and launch it.</p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-num">2</span>
+              <div class="step-content">
+                <strong>Run Llama 3.2</strong>
+                <p>Open terminal and run: <code>ollama run llama3.2</code></p>
+              </div>
+            </div>
+            <div class="step">
+              <span class="step-num">3</span>
+              <div class="step-content">
+                <strong>Launch KobiTab</strong>
+                <p>Open the app and start chatting with your knowledge base.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="terminal shadow-float">
+          <div class="terminal-header">
+            <span class="terminal-dot" style="background: #ff5f56;"></span>
+            <span class="terminal-dot" style="background: #ffbd2e;"></span>
+            <span class="terminal-dot" style="background: #27c93f;"></span>
+          </div>
+          <div class="terminal-body">
+            <span style="color: var(--accent-verdigris); font-weight: 700;">$</span> ollama run llama3.2<br>
+            <span style="color: var(--text-muted);">pulling manifest...</span><br>
+            <span style="color: var(--text-muted);">success! Kobi is ready.</span>
+          </div>
+        </div>
+      </section>
+
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+        <div class="card glass-effect">
+          <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Homebrew Cask</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Prefer the terminal? Install via our custom tap.</p>
+          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.85rem;">
+            <code>brew tap LostWarrior/kobitab</code><br>
+            <code>brew install kobitab</code>
+          </div>
+        </div>
+
+        <div class="card glass-effect">
+          <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Direct Downloads</h3>
+          <ul id="asset-list" class="asset-list">
+            <li class="asset-item" style="color: var(--text-muted);">Fetching assets...</li>
+          </ul>
+          <p id="build-mode-note" class="note is-hidden"></p>
+        </div>
+      </section>
+    </main>
+
+    <footer style="padding: 4rem 0; border-top: 1px solid rgba(0,0,0,0.05);">
+      <div class="container" style="display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.85rem;">
+        <p>© 2026 KobiTab • 100% Free & Open Source</p>
+        <div style="display: flex; gap: 1.5rem;">
+          <a href="https://github.com/__GITHUB_REPOSITORY__" style="color: inherit; text-decoration: none;">GitHub</a>
+          <a id="checksums-link" href="#" style="color: inherit; text-decoration: none;">Checksums</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="./site.js" defer></script>
+  </body>
+</html>
