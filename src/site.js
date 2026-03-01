@@ -32,7 +32,7 @@ function setBuildModeNote(mode) {
   if (mode === 'signed+notarized') {
     note = 'This release is signed and notarized by Apple.'
   } else if (mode === 'adhoc' || mode === 'unsigned') {
-    note = 'To keep KobiTab free and open-source, this release may not be Apple notarized. If macOS warns, right-click KobiTab in Applications and choose Open.'
+    note = 'To keep KobiTab free, this release may not be Apple notarized. If macOS warns, right-click KobiTab in Applications and choose Open.'
   } else {
     note = 'If macOS blocks first launch, right-click KobiTab in Applications and choose Open.'
   }
@@ -75,6 +75,7 @@ function renderAssetList(items) {
   assetList.innerHTML = ''
   for (const itemData of items) {
     const item = document.createElement('li')
+    item.className = 'asset-item' // Added class for proper styling
     const left = document.createElement('span')
     left.textContent = itemData.name
     const right = document.createElement('a')
@@ -139,11 +140,7 @@ async function hydrateReleaseAssets() {
       }
 
       const version = manifest.releaseTag || manifest.version || 'latest'
-      const updated = manifest.updatedAt ? new Date(manifest.updatedAt).toLocaleString() : 'unknown date'
-      const modeKey = String(manifest.buildMode || 'unknown')
-      const mode = formatBuildMode(modeKey)
-      setBuildModeNote(modeKey)
-      setStatus(`Latest release ${version} (${mode}) updated ${updated}.`)
+      setStatus(`Latest release ${version}`)
       return
     }
 
@@ -169,11 +166,9 @@ async function hydrateReleaseAssets() {
       }))
     )
 
-    const published = release.published_at ? new Date(release.published_at).toLocaleString() : 'unknown date'
     const version = release.tag_name || 'latest'
-    const count = assets.length
     setBuildModeNote('unknown')
-    setStatus(`Latest release ${version} published ${published}. ${count} assets available.`)
+    setStatus(`Latest release ${version}`)
   } catch (err) {
     setLatestDmg(fallbackReleasePage)
     setChecksumsLink(fallbackReleasePage)

@@ -118,20 +118,28 @@
         </div>
       </section>
 
-      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
+      <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
         <div class="card glass-effect">
           <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Homebrew Cask</h3>
-          <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Prefer the terminal? Install via our custom tap.</p>
-          <div style="background: var(--bg-primary); padding: 1rem; border-radius: 8px; font-family: var(--font-mono); font-size: 0.85rem;">
-            <code>brew tap LostWarrior/kobitab</code><br>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">The developer-friendly way to install. Keep KobiTab up to date via the command line.</p>
+          <div class="code-block">
+            <code>brew tap LostWarrior/kobitab</code>
             <code>brew install kobitab</code>
+          </div>
+        </div>
+
+        <div class="card glass-effect">
+          <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Security & Trust</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">To keep KobiTab 100% free, we don't pay Apple's $99/year fee. This may trigger a warning on first launch.</p>
+          <div style="background: #fff8e6; padding: 1rem; border-radius: 8px; font-size: 0.85rem; border: 1px solid #ffeeba; color: #856404; line-height: 1.5;">
+            <strong>Workaround:</strong> If macOS blocks the app, right-click <strong>KobiTab</strong> in your Applications folder and choose <strong>Open</strong>.
           </div>
         </div>
 
         <div class="card glass-effect">
           <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Direct Downloads</h3>
           <ul id="asset-list" class="asset-list">
-            <li class="asset-item" style="color: var(--text-muted);">Fetching assets...</li>
+            <li class="asset-item" style="color: var(--text-muted);">Fetching release assets...</li>
           </ul>
           <p id="build-mode-note" class="note is-hidden"></p>
         </div>
@@ -140,7 +148,7 @@
 
     <footer style="padding: 4rem 0; border-top: 1px solid rgba(0,0,0,0.05);">
       <div class="container" style="display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.85rem;">
-        <p>© 2026 KobiTab • 100% Free & Open Source</p>
+        <p>© 2026 KobiTab • 100% Free</p>
         <div style="display: flex; gap: 1.5rem;">
           <a href="https://github.com/__GITHUB_REPOSITORY__" style="color: inherit; text-decoration: none;">GitHub</a>
           <a id="checksums-link" href="#" style="color: inherit; text-decoration: none;">Checksums</a>

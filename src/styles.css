@@ -273,6 +273,7 @@ a:focus-visible, button:focus-visible {
 .asset-item {
   display: flex;
   justify-content: space-between;
+  gap: var(--s-4); /* Added gap for separation */
   padding: var(--s-3);
   background: var(--bg-surface);
   border: 1px solid rgba(0, 0, 0, 0.03);
