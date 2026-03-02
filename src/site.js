@@ -9,6 +9,13 @@ const latestReleaseUrl = `https://api.github.com/repos/${repo}/releases/latest`
 const fallbackReleasePage = `https://github.com/${repo}/releases/latest`
 const latestManifestUrl = '/download/latest/manifest.json'
 
+const heroMascot = document.getElementById('hero-mascot')
+if (heroMascot) {
+  heroMascot.addEventListener('error', () => {
+    heroMascot.classList.add('is-hidden')
+  }, { once: true })
+}
+
 function formatSize(bytes) {
   if (!Number.isFinite(bytes)) return ''
   const units = ['B', 'KB', 'MB', 'GB']
