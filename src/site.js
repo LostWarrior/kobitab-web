@@ -54,6 +54,7 @@ function setBuildModeNote(mode) {
 function setSigningBadge(mode) {
   if (!signingBadge) return
 
+  signingBadge.classList.remove('is-hidden')
   signingBadge.classList.remove(
     'release-signing-badge-signed',
     'release-signing-badge-preview',
@@ -67,13 +68,12 @@ function setSigningBadge(mode) {
   }
 
   if (mode === 'adhoc' || mode === 'unsigned') {
-    signingBadge.textContent = 'Preview signing'
+    signingBadge.textContent = 'Preview release'
     signingBadge.classList.add('release-signing-badge-preview')
     return
   }
 
-  signingBadge.textContent = 'Signing status unknown'
-  signingBadge.classList.add('release-signing-badge-unknown')
+  signingBadge.classList.add('is-hidden')
 }
 
 function toSafeUrl(url, fallback = fallbackReleasePage) {
@@ -125,7 +125,7 @@ function formatBuildMode(mode) {
   if (mode === 'signed+notarized') return 'signed + notarized'
   if (mode === 'adhoc') return 'ad-hoc preview'
   if (mode === 'unsigned') return 'unsigned'
-  return 'unknown signing status'
+  return ''
 }
 
 function buildManifestAssets(manifest) {
@@ -175,7 +175,8 @@ async function hydrateReleaseAssets() {
         renderAssetList(manifestAssets)
       }
       const version = manifest.releaseTag || manifest.version || 'latest'
-      setStatus(`Latest preview ${version} (${formatBuildMode(modeKey)})`)
+      const modeLabel = formatBuildMode(modeKey)
+      setStatus(modeLabel ? `Latest preview ${version} (${modeLabel})` : `Latest preview ${version}`)
       setBuildModeNote(modeKey)
       setSigningBadge(modeKey)
       return
@@ -212,7 +213,7 @@ async function hydrateReleaseAssets() {
     const version = release.tag_name || 'latest'
     setBuildModeNote('unknown')
     setSigningBadge('unknown')
-    setStatus(`Latest preview ${version} (${formatBuildMode('unknown')})`)
+    setStatus(`Latest preview ${version}`)
   } catch (err) {
     setLatestDmg(fallbackReleasePage)
     setChecksumsLink(fallbackReleasePage)

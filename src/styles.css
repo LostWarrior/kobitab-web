@@ -151,7 +151,7 @@ a:focus-visible, button:focus-visible {
   align-items: center;
   justify-content: center;
   padding: var(--s-4) var(--s-8);
-  border-radius: 5%;
+  border-radius: var(--r-lg);
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
@@ -195,12 +195,22 @@ a:focus-visible, button:focus-visible {
 }
 
 .brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.45rem;
   font-weight: 700;
   color: var(--text-primary);
   text-decoration: none;
   letter-spacing: -0.02em;
+}
+
+.brand-mark {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 12px rgba(23, 17, 10, 0.2));
 }
 
 .nav-links a {
@@ -248,6 +258,18 @@ a:focus-visible, button:focus-visible {
   color: var(--text-muted);
   background: rgba(95, 99, 104, 0.1);
   border-color: rgba(95, 99, 104, 0.24);
+}
+
+.github-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.github-link svg {
+  width: 15px;
+  height: 15px;
+  fill: currentColor;
 }
 
 /* Hero Section */
@@ -371,7 +393,7 @@ a:focus-visible, button:focus-visible {
   background: #1e1e1e;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1.25rem;
-  border-radius: 5%;
+  border-radius: var(--r-lg);
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -400,6 +422,19 @@ a:focus-visible, button:focus-visible {
   margin-top: var(--s-4);
 }
 
+.distribution-grid {
+  display: grid;
+  grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr);
+  gap: var(--s-6);
+  margin-bottom: var(--s-16);
+  align-items: start;
+}
+
+.distribution-left {
+  display: grid;
+  gap: var(--s-6);
+}
+
 .asset-item {
   display: flex;
   justify-content: space-between;
@@ -407,7 +442,7 @@ a:focus-visible, button:focus-visible {
   padding: var(--s-3);
   background: var(--bg-surface);
   border: 1px solid rgba(0, 0, 0, 0.03);
-  border-radius: 5%;
+  border-radius: var(--r-lg);
   font-size: 0.85rem;
 }
 
@@ -421,6 +456,7 @@ a:focus-visible, button:focus-visible {
 /* Responsive */
 @media (max-width: 800px) {
   .setup-card { grid-template-columns: 1fr; }
+  .distribution-grid { grid-template-columns: 1fr; }
   .hero { padding-top: var(--s-12); }
   .hero-mascot {
     width: clamp(66px, 16vw, 88px);
@@ -436,7 +472,7 @@ a:focus-visible, button:focus-visible {
 /* Security Mockup */
 .macos-dialog {
   background: white;
-  border-radius: 5%;
+  border-radius: var(--r-lg);
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1rem;
   text-align: left;
