@@ -128,6 +128,8 @@ a:focus-visible, button:focus-visible {
   line-height: 1.1;
   font-weight: 700; /* Adjusted for Open Sans */
   letter-spacing: -0.03em;
+  position: relative;
+  z-index: 2;
 }
 
 .accent-text {
@@ -149,7 +151,7 @@ a:focus-visible, button:focus-visible {
   align-items: center;
   justify-content: center;
   padding: var(--s-4) var(--s-8);
-  border-radius: var(--r-sm);
+  border-radius: 5%;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
@@ -219,11 +221,51 @@ a:focus-visible, button:focus-visible {
   padding: var(--s-16) 0 var(--s-12);
 }
 
+.headline-peek {
+  position: relative;
+  display: block;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.hero-mascot {
+  width: clamp(180px, 26vw, 300px);
+  height: clamp(170px, 22vw, 255px);
+  position: absolute;
+  top: clamp(0.8rem, 2.1vw, 1.8rem);
+  left: clamp(-10.8rem, -12vw, -7rem);
+  z-index: 1;
+  pointer-events: none;
+  user-select: none;
+  object-fit: cover;
+  object-position: 50% 24%;
+  clip-path: inset(0 0 22% 0 round 22px);
+  filter: drop-shadow(0 18px 28px rgba(23, 17, 10, 0.2));
+  animation: mascot-bob 4s ease-in-out infinite;
+}
+
+.hero-mascot.is-hidden {
+  display: none;
+}
+
 .subheadline {
   font-size: clamp(1.1rem, 2vw, 1.25rem);
   color: var(--text-secondary);
   max-width: 600px;
   margin: var(--s-6) auto var(--s-8);
+}
+
+.hero-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--s-6);
+}
+
+@keyframes mascot-bob {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-8px) rotate(1.5deg); }
 }
 
 /* Bento Grid */
@@ -290,7 +332,7 @@ a:focus-visible, button:focus-visible {
   background: #1e1e1e;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1.25rem;
-  border-radius: var(--radius-sm);
+  border-radius: 5%;
   margin-top: 1rem;
   display: flex;
   flex-direction: column;
@@ -326,7 +368,7 @@ a:focus-visible, button:focus-visible {
   padding: var(--s-3);
   background: var(--bg-surface);
   border: 1px solid rgba(0, 0, 0, 0.03);
-  border-radius: var(--r-sm);
+  border-radius: 5%;
   font-size: 0.85rem;
 }
 
@@ -334,12 +376,19 @@ a:focus-visible, button:focus-visible {
 @media (max-width: 800px) {
   .setup-card { grid-template-columns: 1fr; }
   .hero { padding-top: var(--s-12); }
+  .hero-mascot {
+    width: clamp(128px, 34vw, 170px);
+    height: clamp(116px, 30vw, 152px);
+    top: 2.6rem;
+    left: clamp(-5.8rem, -18vw, -3.8rem);
+    object-position: 50% 22%;
+  }
 }
 
 /* Security Mockup */
 .macos-dialog {
   background: white;
-  border-radius: 5px;
+  border-radius: 5%;
   border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 1rem;
   text-align: left;
@@ -350,7 +399,6 @@ a:focus-visible, button:focus-visible {
 .dialog-content {
   display: flex;
   gap: 0.75rem;
-  margin-bottom: 1rem;
 }
 
 .dialog-icon {
@@ -369,20 +417,6 @@ a:focus-visible, button:focus-visible {
   font-size: 0.75rem;
   color: var(--text-muted);
   line-height: 1.3;
-}
-
-.dialog-buttons {
-  display: flex;
-  justify-content: flex-end;
-  border-top: 1px solid rgba(0, 0, 0, 0.05);
-  padding-top: 0.5rem;
-}
-
-.dialog-btn {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--accent-blue);
-  cursor: pointer;
 }
 
 .is-hidden { display: none; }

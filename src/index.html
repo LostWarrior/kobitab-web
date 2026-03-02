@@ -45,7 +45,10 @@
     <main class="container">
       <section class="hero">
         <div class="badge">macOS • Private • Local AI</div>
-        <h1 class="headline">Intelligence,<br><span class="accent-text">locally grown.</span></h1>
+        <div class="headline-peek">
+          <img id="hero-mascot" class="hero-mascot" src="./squirrel-mascot.png" alt="" aria-hidden="true" decoding="async" />
+          <h1 class="headline">Intelligence,<br><span class="accent-text">locally grown.</span></h1>
+        </div>
         <p class="subheadline">
           The privacy-first bookmark manager that brings RAG-powered chat and smart summaries to your machine. No cloud, no tracking.
         </p>
@@ -113,7 +116,7 @@
             <span class="terminal-dot" style="background: #27c93f;"></span>
           </div>
           <div class="terminal-body">
-            <span style="color: var(--accent-verdigris); font-weight: 700;">$</span> ollama serve &<br>
+            <span style="color: var(--accent-verdigris); font-weight: 700;">$</span> ollama serve<br>
             <span style="color: var(--text-muted);">listening on 127.0.0.1:11434...</span><br><br>
             <span style="color: var(--accent-verdigris); font-weight: 700;">$</span> ollama run llama3.2<br>
             <span style="color: var(--text-muted);">success! Kobi is ready.</span>
@@ -142,9 +145,6 @@
                 <div class="dialog-title">“KobiTab” can’t be opened because it is from an unidentified developer.</div>
                 <div class="dialog-message">macOS cannot verify that this app is free from malware.</div>
               </div>
-            </div>
-            <div class="dialog-buttons">
-              <div class="dialog-btn">OK</div>
             </div>
           </div>
 
