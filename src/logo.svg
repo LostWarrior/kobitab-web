@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="180" height="40" viewBox="0 0 180 40" fill="none">
+  <!-- Abstract Knowledge Prism Icon -->
+  <rect x="2" y="6" width="28" height="28" rx="3" fill="url(#prism_grad)" />
+  <path d="M10 14L16 20L10 26" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+  <path d="M20 14L14 20L20 26" stroke="white" stroke-width="1.5" stroke-opacity="0.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.5" />
+  
+  <!-- KobiTab Text -->
+  <text x="40" y="28" font-family="'Roboto', sans-serif" font-size="22" font-weight="700" fill="#1a1c1e" letter-spacing="-0.03em">KobiTab</text>
+  
+  <defs>
+    <linearGradient id="prism_grad" x1="2" y1="6" x2="30" y2="34" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0f766e" />
+      <stop offset="1" stop-color="#8d5f27" />
+    </linearGradient>
+  </defs>
+</svg>

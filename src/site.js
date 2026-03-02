@@ -129,7 +129,9 @@ async function hydrateReleaseAssets() {
     const manifestRes = await fetch(latestManifestUrl, { cache: 'no-store' })
     if (manifestRes.ok) {
       const manifest = await manifestRes.json()
-      const manifestAssets = buildManifestAssets(manifest)
+      const manifestAssets = buildManifestAssets(manifest).filter(item => {
+        return item.name.toLowerCase().endsWith('.dmg')
+      })
       const preferredDmg = manifestAssets.find((item) => item.name.toLowerCase().endsWith('universal.dmg'))
         || manifestAssets.find((item) => item.name.toLowerCase().endsWith('.dmg'))
       setLatestDmg(preferredDmg?.url || fallbackReleasePage)
@@ -138,16 +140,19 @@ async function hydrateReleaseAssets() {
       if (manifestAssets.length > 0) {
         renderAssetList(manifestAssets)
       }
-
       const version = manifest.releaseTag || manifest.version || 'latest'
       setStatus(`Latest release ${version}`)
+      // setBuildModeNote(modeKey) // Removed redundant text
       return
     }
 
     const res = await fetch(latestReleaseUrl)
     if (!res.ok) throw new Error(`GitHub API request failed (${res.status})`)
     const release = await res.json()
-    const assets = Array.isArray(release.assets) ? release.assets : []
+    const allAssets = Array.isArray(release.assets) ? release.assets : []
+    const assets = allAssets.filter(asset => {
+      return asset.name.toLowerCase().endsWith('.dmg')
+    })
 
     const dmgAsset = assets.find((asset) => String(asset.name).toLowerCase().endsWith('.dmg'))
     const checksumsAsset = assets.find((asset) => String(asset.name).toLowerCase() === 'checksums.txt')
@@ -167,12 +172,12 @@ async function hydrateReleaseAssets() {
     )
 
     const version = release.tag_name || 'latest'
-    setBuildModeNote('unknown')
+    // setBuildModeNote('unknown') // Removed redundant text
     setStatus(`Latest release ${version}`)
   } catch (err) {
     setLatestDmg(fallbackReleasePage)
     setChecksumsLink(fallbackReleasePage)
-    setBuildModeNote('unknown')
+    // setBuildModeNote('unknown') // Removed redundant text
     setStatus(`Could not load release metadata automatically. Open ${fallbackReleasePage}.`)
   }
 }

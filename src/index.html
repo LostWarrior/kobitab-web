@@ -17,12 +17,12 @@
     <meta name="twitter:title" content="KobiTab | Intelligence, locally grown." />
     <meta name="twitter:description" content="A local-first bookmark manager with built-in AI. Privacy-focused, RAG-powered, and built for macOS." />
 
-    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://api.github.com 'self'; img-src 'self' data:;" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://api.github.com 'self'; img-src 'self' data:;" />
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;700&family=Outfit:wght@300;400;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     
+    <link rel="icon" type="image/png" href="./icon.png" />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
@@ -31,9 +31,11 @@
       <div class="blob blob-2"></div>
     </div>
 
-    <nav class="nav glass-effect">
+    <nav class="nav">
       <div class="nav-content container">
-        <a href="/" class="brand">KobiTab</a>
+        <a href="/" class="brand">
+          <img src="./logo.svg" alt="KobiTab" height="32">
+        </a>
         <div class="nav-links">
           <a href="https://github.com/__GITHUB_REPOSITORY__" target="_blank" rel="noopener noreferrer">GitHub Project</a>
         </div>
@@ -90,8 +92,8 @@
             <div class="step">
               <span class="step-num">2</span>
               <div class="step-content">
-                <strong>Run Llama 3.2</strong>
-                <p>Open terminal and run: <code>ollama run llama3.2</code></p>
+                <strong>Download a Model</strong>
+                <p>Run <code>ollama run llama3.2</code> (or any model of your choice) in your terminal.</p>
               </div>
             </div>
             <div class="step">
@@ -111,8 +113,9 @@
             <span class="terminal-dot" style="background: #27c93f;"></span>
           </div>
           <div class="terminal-body">
+            <span style="color: var(--accent-verdigris); font-weight: 700;">$</span> ollama serve &<br>
+            <span style="color: var(--text-muted);">listening on 127.0.0.1:11434...</span><br><br>
             <span style="color: var(--accent-verdigris); font-weight: 700;">$</span> ollama run llama3.2<br>
-            <span style="color: var(--text-muted);">pulling manifest...</span><br>
             <span style="color: var(--text-muted);">success! Kobi is ready.</span>
           </div>
         </div>
@@ -122,7 +125,7 @@
         <div class="card glass-effect">
           <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Homebrew Cask</h3>
           <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">The developer-friendly way to install. Keep KobiTab up to date via the command line.</p>
-          <div class="code-block">
+          <div class="code-panel">
             <code>brew tap LostWarrior/kobitab</code>
             <code>brew install kobitab</code>
           </div>
@@ -130,14 +133,28 @@
 
         <div class="card glass-effect">
           <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Security & Trust</h3>
-          <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">To keep KobiTab 100% free, we don't pay Apple's $99/year fee. This may trigger a warning on first launch.</p>
-          <div style="background: #fff8e6; padding: 1rem; border-radius: 8px; font-size: 0.85rem; border: 1px solid #ffeeba; color: #856404; line-height: 1.5;">
-            <strong>Workaround:</strong> If macOS blocks the app, right-click <strong>KobiTab</strong> in your Applications folder and choose <strong>Open</strong>.
+          <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9rem;">If you see the following warning on your first launch:</p>
+          
+          <div class="macos-dialog shadow-soft">
+            <div class="dialog-content">
+              <div class="dialog-icon">⚠️</div>
+              <div class="dialog-text">
+                <div class="dialog-title">“KobiTab” can’t be opened because it is from an unidentified developer.</div>
+                <div class="dialog-message">macOS cannot verify that this app is free from malware.</div>
+              </div>
+            </div>
+            <div class="dialog-buttons">
+              <div class="dialog-btn">OK</div>
+            </div>
           </div>
+
+          <p style="color: var(--text-secondary); margin-top: 1.5rem; font-size: 0.85rem; line-height: 1.5;">
+            Simply <strong>right-click</strong> KobiTab in your Applications folder and choose <strong>Open</strong> to bypass it permanently.
+          </p>
         </div>
 
         <div class="card glass-effect">
-          <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Direct Downloads</h3>
+          <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Or directly download</h3>
           <ul id="asset-list" class="asset-list">
             <li class="asset-item" style="color: var(--text-muted);">Fetching release assets...</li>
           </ul>
