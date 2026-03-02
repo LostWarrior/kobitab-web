@@ -8,6 +8,7 @@ const repo = (() => {
 const latestReleaseUrl = `https://api.github.com/repos/${repo}/releases/latest`
 const fallbackReleasePage = `https://github.com/${repo}/releases/latest`
 const latestManifestUrl = '/download/latest/manifest.json'
+const signingBadge = document.getElementById('release-signing-badge')
 
 const heroMascot = document.getElementById('hero-mascot')
 if (heroMascot) {
@@ -37,17 +38,42 @@ function setStatus(text) {
 function setBuildModeNote(mode) {
   let note = ''
   if (mode === 'signed+notarized') {
-    note = 'This release is signed and notarized by Apple.'
+    note = 'Signed + notarized release. Gatekeeper should allow standard launch.'
   } else if (mode === 'adhoc' || mode === 'unsigned') {
-    note = 'To keep KobiTab free, this release may not be Apple notarized. If macOS warns, right-click KobiTab in Applications and choose Open.'
+    note = 'Preview release without full notarization. If blocked, run: xattr -dr com.apple.quarantine /Applications/KobiTab.app'
   } else {
-    note = 'If macOS blocks first launch, right-click KobiTab in Applications and choose Open.'
+    note = 'Release signing status unavailable. If blocked, run xattr fix or right-click Open in Applications.'
   }
 
   for (const node of document.querySelectorAll('#build-mode-note')) {
     node.textContent = note
     node.classList.remove('is-hidden')
   }
+}
+
+function setSigningBadge(mode) {
+  if (!signingBadge) return
+
+  signingBadge.classList.remove(
+    'release-signing-badge-signed',
+    'release-signing-badge-preview',
+    'release-signing-badge-unknown'
+  )
+
+  if (mode === 'signed+notarized') {
+    signingBadge.textContent = 'Signed release'
+    signingBadge.classList.add('release-signing-badge-signed')
+    return
+  }
+
+  if (mode === 'adhoc' || mode === 'unsigned') {
+    signingBadge.textContent = 'Preview signing'
+    signingBadge.classList.add('release-signing-badge-preview')
+    return
+  }
+
+  signingBadge.textContent = 'Signing status unknown'
+  signingBadge.classList.add('release-signing-badge-unknown')
 }
 
 function toSafeUrl(url, fallback = fallbackReleasePage) {
@@ -97,8 +123,9 @@ function renderAssetList(items) {
 
 function formatBuildMode(mode) {
   if (mode === 'signed+notarized') return 'signed + notarized'
+  if (mode === 'adhoc') return 'ad-hoc preview'
   if (mode === 'unsigned') return 'unsigned'
-  return mode
+  return 'unknown signing status'
 }
 
 function buildManifestAssets(manifest) {
@@ -136,11 +163,11 @@ async function hydrateReleaseAssets() {
     const manifestRes = await fetch(latestManifestUrl, { cache: 'no-store' })
     if (manifestRes.ok) {
       const manifest = await manifestRes.json()
-      const manifestAssets = buildManifestAssets(manifest).filter(item => {
-        return item.name.toLowerCase().endsWith('.dmg')
-      })
-      const preferredDmg = manifestAssets.find((item) => item.name.toLowerCase().endsWith('universal.dmg'))
-        || manifestAssets.find((item) => item.name.toLowerCase().endsWith('.dmg'))
+      const modeKey = String(manifest.buildMode || 'unknown').toLowerCase()
+      const manifestAssets = buildManifestAssets(manifest)
+      const dmgAssets = manifestAssets.filter((item) => item.name.toLowerCase().endsWith('.dmg'))
+      const preferredDmg = dmgAssets.find((item) => item.name.toLowerCase().endsWith('universal.dmg'))
+        || dmgAssets.find((item) => item.name.toLowerCase().endsWith('.dmg'))
       setLatestDmg(preferredDmg?.url || fallbackReleasePage)
       setChecksumsLink(manifest.checksumsFile || fallbackReleasePage)
 
@@ -148,8 +175,9 @@ async function hydrateReleaseAssets() {
         renderAssetList(manifestAssets)
       }
       const version = manifest.releaseTag || manifest.version || 'latest'
-      setStatus(`Latest release ${version}`)
-      // setBuildModeNote(modeKey) // Removed redundant text
+      setStatus(`Latest preview ${version} (${formatBuildMode(modeKey)})`)
+      setBuildModeNote(modeKey)
+      setSigningBadge(modeKey)
       return
     }
 
@@ -157,11 +185,14 @@ async function hydrateReleaseAssets() {
     if (!res.ok) throw new Error(`GitHub API request failed (${res.status})`)
     const release = await res.json()
     const allAssets = Array.isArray(release.assets) ? release.assets : []
-    const assets = allAssets.filter(asset => {
-      return asset.name.toLowerCase().endsWith('.dmg')
+    const assets = allAssets.filter((asset) => {
+      const name = String(asset.name).toLowerCase()
+      return name.endsWith('.dmg') || name.endsWith('.zip')
     })
 
-    const dmgAsset = assets.find((asset) => String(asset.name).toLowerCase().endsWith('.dmg'))
+    const dmgAsset =
+      assets.find((asset) => String(asset.name).toLowerCase().endsWith('universal.dmg'))
+      || assets.find((asset) => String(asset.name).toLowerCase().endsWith('.dmg'))
     const checksumsAsset = assets.find((asset) => String(asset.name).toLowerCase() === 'checksums.txt')
     if (dmgAsset?.browser_download_url) {
       setLatestDmg(dmgAsset.browser_download_url)
@@ -179,13 +210,15 @@ async function hydrateReleaseAssets() {
     )
 
     const version = release.tag_name || 'latest'
-    // setBuildModeNote('unknown') // Removed redundant text
-    setStatus(`Latest release ${version}`)
+    setBuildModeNote('unknown')
+    setSigningBadge('unknown')
+    setStatus(`Latest preview ${version} (${formatBuildMode('unknown')})`)
   } catch (err) {
     setLatestDmg(fallbackReleasePage)
     setChecksumsLink(fallbackReleasePage)
-    // setBuildModeNote('unknown') // Removed redundant text
-    setStatus(`Could not load release metadata automatically. Open ${fallbackReleasePage}.`)
+    setBuildModeNote('unknown')
+    setSigningBadge('unknown')
+    setStatus(`Could not load preview metadata automatically. Open ${fallbackReleasePage}.`)
   }
 }
 

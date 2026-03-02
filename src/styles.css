@@ -215,6 +215,41 @@ a:focus-visible, button:focus-visible {
   color: var(--accent-verdigris);
 }
 
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: var(--s-4);
+}
+
+.release-signing-badge {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+  white-space: nowrap;
+}
+
+.release-signing-badge-signed {
+  color: #0f766e;
+  background: rgba(15, 118, 110, 0.12);
+  border-color: rgba(15, 118, 110, 0.24);
+}
+
+.release-signing-badge-preview {
+  color: #8d5f27;
+  background: rgba(141, 95, 39, 0.14);
+  border-color: rgba(141, 95, 39, 0.28);
+}
+
+.release-signing-badge-unknown {
+  color: var(--text-muted);
+  background: rgba(95, 99, 104, 0.1);
+  border-color: rgba(95, 99, 104, 0.24);
+}
+
 /* Hero Section */
 .hero {
   text-align: center;
@@ -259,6 +294,12 @@ a:focus-visible, button:focus-visible {
   align-items: center;
   flex-wrap: wrap;
   gap: var(--s-6);
+}
+
+.status-text {
+  margin-top: var(--s-4);
+  font-size: 0.9rem;
+  color: var(--text-muted);
 }
 
 @keyframes mascot-bob {
@@ -370,6 +411,13 @@ a:focus-visible, button:focus-visible {
   font-size: 0.85rem;
 }
 
+.note {
+  margin-top: var(--s-4);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
 /* Responsive */
 @media (max-width: 800px) {
   .setup-card { grid-template-columns: 1fr; }
@@ -378,6 +426,10 @@ a:focus-visible, button:focus-visible {
     width: clamp(66px, 16vw, 88px);
     left: calc(100% + 0.6rem);
     top: 54%;
+  }
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
 }
 

@@ -37,6 +37,9 @@
           <img src="./logo.svg" alt="KobiTab" height="32">
         </a>
         <div class="nav-links">
+          <span id="release-signing-badge" class="release-signing-badge release-signing-badge-unknown">
+            Signing status: checking
+          </span>
           <a href="https://github.com/__GITHUB_REPOSITORY__" target="_blank" rel="noopener noreferrer">GitHub Project</a>
         </div>
       </div>
@@ -55,12 +58,12 @@
         
         <div class="hero-actions">
           <a id="download-dmg-link" href="https://github.com/__GITHUB_REPOSITORY__/releases/latest" class="btn btn-primary">
-            Download for macOS
+            Download Preview for macOS
           </a>
           <a href="#setup" class="btn btn-secondary">Setup Guide</a>
         </div>
         
-        <p id="asset-status" class="status-text">Loading latest release metadata...</p>
+        <p id="asset-status" class="status-text">Loading latest preview metadata...</p>
       </section>
 
       <div class="bento-grid">
@@ -126,11 +129,12 @@
 
       <section style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem; margin-bottom: 4rem;">
         <div class="card glass-effect">
-          <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Homebrew Cask</h3>
-          <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">The developer-friendly way to install. Keep KobiTab up to date via the command line.</p>
+          <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Homebrew Preview</h3>
+          <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Temporary preview channel while signed distribution is being finalized.</p>
           <div class="code-panel">
             <code>brew tap LostWarrior/kobitab</code>
             <code>brew install kobitab</code>
+            <code>xattr -dr com.apple.quarantine /Applications/KobiTab.app</code>
           </div>
         </div>
 
@@ -142,19 +146,19 @@
             <div class="dialog-content">
               <div class="dialog-icon">⚠️</div>
               <div class="dialog-text">
-                <div class="dialog-title">“KobiTab” can’t be opened because it is from an unidentified developer.</div>
-                <div class="dialog-message">macOS cannot verify that this app is free from malware.</div>
+                <div class="dialog-title">“KobiTab” is damaged or from an unidentified developer.</div>
+                <div class="dialog-message">Until signing is active for public releases, Gatekeeper can block launch.</div>
               </div>
             </div>
           </div>
 
           <p style="color: var(--text-secondary); margin-top: 1.5rem; font-size: 0.85rem; line-height: 1.5;">
-            Simply <strong>right-click</strong> KobiTab in your Applications folder and choose <strong>Open</strong> to bypass it permanently.
+            Use <strong>xattr</strong> (shown left) or <strong>right-click</strong> KobiTab in Applications and choose <strong>Open</strong>.
           </p>
         </div>
 
         <div class="card glass-effect">
-          <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Or directly download</h3>
+          <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Direct Preview Downloads</h3>
           <ul id="asset-list" class="asset-list">
             <li class="asset-item" style="color: var(--text-muted);">Fetching release assets...</li>
           </ul>

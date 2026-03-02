@@ -21,7 +21,7 @@ Please see the app repository security policy:
 
 - https://github.com/LostWarrior/Kobitab/blob/main/SECURITY.md
 
-## Homebrew Install
+## Homebrew Preview Install
 
 ```bash
 brew tap LostWarrior/kobitab
@@ -32,4 +32,10 @@ Direct cask URL:
 
 ```bash
 brew install --cask https://kobitab.com/download/homebrew/kobitab.rb
+```
+
+If macOS blocks first launch:
+
+```bash
+xattr -dr com.apple.quarantine /Applications/KobiTab.app
 ```
