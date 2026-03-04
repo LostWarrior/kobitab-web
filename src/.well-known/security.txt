@@ -1,0 +1,5 @@
+Contact: https://github.com/LostWarrior/Kobitab/security/advisories/new
+Policy: https://github.com/LostWarrior/Kobitab/blob/main/SECURITY.md
+Canonical: https://kobitab.com/.well-known/security.txt
+Preferred-Languages: en
+Expires: 2027-03-01T00:00:00.000Z
