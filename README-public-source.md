@@ -13,13 +13,13 @@ KobiTab is a privacy-first, local-only bookmark manager for macOS.
 
 Use the latest release page for install packages:
 
-- https://github.com/LostWarrior/Kobitab/releases/latest
+- https://github.com/Arkyant/Kobitab/releases/latest
 
 ## Security
 
 Please see the app repository security policy:
 
-- https://github.com/LostWarrior/Kobitab/blob/main/SECURITY.md
+- https://github.com/Arkyant/Kobitab/blob/main/SECURITY.md
 
 ## Homebrew Preview Install
 

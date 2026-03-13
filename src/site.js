@@ -1,8 +1,8 @@
 const repo = (() => {
   const link = document.querySelector('a[href*="github.com/"]')
-  if (!link) return 'LostWarrior/Kobitab'
+  if (!link) return 'Arkyant/Kobitab'
   const match = link.getAttribute('href')?.match(/github\.com\/([^/]+\/[^/]+)/)
-  return match?.[1] || 'LostWarrior/Kobitab'
+  return match?.[1] || 'Arkyant/Kobitab'
 })()
 
 const latestReleaseUrl = `https://api.github.com/repos/${repo}/releases/latest`
