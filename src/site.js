@@ -40,9 +40,9 @@ function setBuildModeNote(mode) {
   if (mode === 'signed+notarized') {
     note = 'Signed + notarized release. Gatekeeper should allow standard launch.'
   } else if (mode === 'adhoc' || mode === 'unsigned') {
-    note = 'Preview release without full notarization. If blocked, run: xattr -dr com.apple.quarantine /Applications/KobiTab.app'
+    note = 'Internal preview build without full notarization. Prefer the latest signed public release when possible.'
   } else {
-    note = 'Release signing status unavailable. If blocked, run xattr fix or right-click Open in Applications.'
+    note = 'Release signing status unavailable. Verify that you are using the latest public release.'
   }
 
   for (const node of document.querySelectorAll('#build-mode-note')) {

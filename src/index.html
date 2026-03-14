@@ -139,38 +139,31 @@
       <section class="distribution-grid">
         <div class="distribution-left">
           <div class="card glass-effect">
-            <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Homebrew Preview</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Temporary preview channel while signed distribution is being finalized.</p>
+            <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Homebrew Install</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">Install the latest notarized KobiTab release from the public cask.</p>
             <div class="code-panel">
               <code>brew tap LostWarrior/kobitab</code>
               <code>brew install kobitab</code>
-              <code>xattr -dr com.apple.quarantine /Applications/KobiTab.app</code>
             </div>
           </div>
 
           <div class="card glass-effect">
             <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Security & Trust</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1.5rem; font-size: 0.9rem;">If you see the following warning on your first launch:</p>
-
-            <div class="macos-dialog shadow-soft">
-              <div class="dialog-content">
-                <div class="dialog-icon">⚠️</div>
-                <div class="dialog-text">
-                  <div class="dialog-title">“KobiTab” is damaged or from an unidentified developer.</div>
-                  <div class="dialog-message">Until signing is active for public releases, Gatekeeper can block launch.</div>
-                </div>
-              </div>
-            </div>
-
-            <p style="color: var(--text-secondary); margin-top: 1.5rem; font-size: 0.85rem; line-height: 1.5;">
-              Use <strong>xattr</strong> (shown above) or <strong>right-click</strong> KobiTab in Applications and choose <strong>Open</strong>.
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.9rem;">
+              Public KobiTab releases are signed and notarized for standard macOS launch.
+            </p>
+            <p style="color: var(--text-secondary); margin-bottom: 0.75rem; font-size: 0.85rem; line-height: 1.5;">
+              Download from this site, the GitHub release page, or the Homebrew cask and open the app normally from Applications.
+            </p>
+            <p style="color: var(--text-secondary); font-size: 0.85rem; line-height: 1.5;">
+              If macOS still blocks launch, treat that as an unexpected issue and use the release checksums or security policy to verify what you downloaded before retrying.
             </p>
           </div>
         </div>
 
         <div class="distribution-right">
           <div class="card glass-effect">
-            <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Direct Preview Downloads</h3>
+            <h3 style="font-family: var(--font-display); margin-bottom: 1rem;">Direct Downloads</h3>
             <ul id="asset-list" class="asset-list">
               <li class="asset-item" style="color: var(--text-muted);">Fetching release assets...</li>
             </ul>
