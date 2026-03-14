@@ -23,7 +23,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     env:
-      APP_RELEASE_REPO: Arkyant/Kobitab
+      APP_RELEASE_REPO: LostWarrior/Kobitab
     steps:
       - name: Checkout
         uses: actions/checkout@v4
