@@ -10,6 +10,49 @@ const fallbackReleasePage = `https://github.com/${repo}/releases/latest`
 const latestManifestUrl = '/download/latest/manifest.json'
 const signingBadge = document.getElementById('release-signing-badge')
 
+function trackEvent(name, props = {}) {
+  if (!window.zaraz || typeof window.zaraz.track !== 'function') return
+  window.zaraz.track(name, props)
+}
+
+function setupAnalyticsTracking() {
+  trackEvent('Page Loaded', { path: window.location.pathname })
+
+  document.addEventListener('click', (event) => {
+    const target = event.target instanceof Element ? event.target : null
+    if (!target) return
+
+    const button = target.closest('button, a.btn')
+    if (button) {
+      const label = button.textContent ? button.textContent.trim().replace(/\s+/g, ' ').slice(0, 80) : 'unknown'
+      trackEvent('Button Click', {
+        id: button.id || '',
+        label
+      })
+    }
+
+    const link = target.closest('a')
+    if (!link) return
+    const href = link.getAttribute('href') || ''
+    const lowerHref = href.toLowerCase()
+    const isDownload =
+      lowerHref.includes('/releases/download/')
+      || lowerHref.endsWith('.dmg')
+      || lowerHref.endsWith('.zip')
+      || lowerHref.endsWith('.pkg')
+      || lowerHref.endsWith('checksums.txt')
+      || lowerHref.includes('/download/homebrew/')
+      || link.id === 'download-dmg-link'
+
+    if (!isDownload) return
+    const filename = href.split('/').pop() || href || 'unknown'
+    trackEvent('Download Click', {
+      id: link.id || '',
+      file: filename
+    })
+  })
+}
+
 const heroMascot = document.getElementById('hero-mascot')
 if (heroMascot) {
   heroMascot.addEventListener('error', () => {
@@ -224,3 +267,4 @@ async function hydrateReleaseAssets() {
 }
 
 hydrateReleaseAssets()
+setupAnalyticsTracking()
