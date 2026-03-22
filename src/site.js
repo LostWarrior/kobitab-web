@@ -119,7 +119,7 @@ function setSigningBadge(mode) {
   signingBadge.classList.add('is-hidden')
 }
 
-function toSafeUrl(url, fallback = fallbackReleasePage) {
+function toSafeUrl(url, fallback = '#') {
   try {
     const parsed = new URL(url, window.location.origin)
     if (parsed.protocol === 'https:' || parsed.protocol === 'http:') {
@@ -131,8 +131,14 @@ function toSafeUrl(url, fallback = fallbackReleasePage) {
   }
 }
 
+function getCurrentHref(id) {
+  const node = document.getElementById(id)
+  return node?.getAttribute('href') || '#'
+}
+
 function setLatestDmg(url) {
-  const href = toSafeUrl(url)
+  const current = getCurrentHref('download-dmg-link')
+  const href = toSafeUrl(url, current)
   for (const id of ['download-dmg-link', 'download-latest-link']) {
     const node = document.getElementById(id)
     if (node) node.setAttribute('href', href)
@@ -142,7 +148,8 @@ function setLatestDmg(url) {
 function setChecksumsLink(url) {
   const node = document.getElementById('checksums-link')
   if (!node) return
-  node.setAttribute('href', toSafeUrl(url))
+  const current = node.getAttribute('href') || '#'
+  node.setAttribute('href', toSafeUrl(url, current))
 }
 
 function renderAssetList(items) {
@@ -151,7 +158,7 @@ function renderAssetList(items) {
   assetList.innerHTML = ''
   for (const itemData of items) {
     const item = document.createElement('li')
-    item.className = 'asset-item' // Added class for proper styling
+    item.className = 'asset-item'
     const left = document.createElement('span')
     left.textContent = itemData.name
     const right = document.createElement('a')
@@ -181,10 +188,7 @@ function buildManifestAssets(manifest) {
   const assetEntries = [
     ['universalDmg', 'Universal DMG'],
     ['arm64Dmg', 'Apple Silicon DMG'],
-    ['x64Dmg', 'Intel DMG'],
-    ['universalZip', 'Universal ZIP'],
-    ['arm64Zip', 'Apple Silicon ZIP'],
-    ['x64Zip', 'Intel ZIP']
+    ['x64Dmg', 'Intel DMG']
   ]
 
   const items = []
@@ -208,11 +212,10 @@ async function hydrateReleaseAssets() {
       const manifest = await manifestRes.json()
       const modeKey = String(manifest.buildMode || 'unknown').toLowerCase()
       const manifestAssets = buildManifestAssets(manifest)
-      const dmgAssets = manifestAssets.filter((item) => item.name.toLowerCase().endsWith('.dmg'))
-      const preferredDmg = dmgAssets.find((item) => item.name.toLowerCase().endsWith('universal.dmg'))
-        || dmgAssets.find((item) => item.name.toLowerCase().endsWith('.dmg'))
-      setLatestDmg(preferredDmg?.url || fallbackReleasePage)
-      setChecksumsLink(manifest.checksumsFile || fallbackReleasePage)
+      const preferredDmg = manifestAssets.find((item) => item.name.toLowerCase().endsWith('universal.dmg'))
+        || manifestAssets.find((item) => item.name.toLowerCase().endsWith('.dmg'))
+      setLatestDmg(preferredDmg?.url)
+      setChecksumsLink(manifest.checksumsFile)
 
       if (manifestAssets.length > 0) {
         renderAssetList(manifestAssets)
@@ -231,19 +234,17 @@ async function hydrateReleaseAssets() {
     const allAssets = Array.isArray(release.assets) ? release.assets : []
     const assets = allAssets.filter((asset) => {
       const name = String(asset.name).toLowerCase()
-      return name.endsWith('.dmg') || name.endsWith('.zip')
+      return name.endsWith('.dmg')
     })
 
     const dmgAsset =
       assets.find((asset) => String(asset.name).toLowerCase().endsWith('universal.dmg'))
       || assets.find((asset) => String(asset.name).toLowerCase().endsWith('.dmg'))
-    const checksumsAsset = assets.find((asset) => String(asset.name).toLowerCase() === 'checksums.txt')
+    const checksumsAsset = allAssets.find((asset) => String(asset.name).toLowerCase() === 'checksums.txt')
     if (dmgAsset?.browser_download_url) {
       setLatestDmg(dmgAsset.browser_download_url)
-    } else {
-      setLatestDmg(fallbackReleasePage)
     }
-    setChecksumsLink(checksumsAsset?.browser_download_url || fallbackReleasePage)
+    setChecksumsLink(checksumsAsset?.browser_download_url)
 
     renderAssetList(
       assets.map((asset) => ({
@@ -258,11 +259,9 @@ async function hydrateReleaseAssets() {
     setSigningBadge('unknown')
     setStatus(`Latest preview ${version}`)
   } catch (err) {
-    setLatestDmg(fallbackReleasePage)
-    setChecksumsLink(fallbackReleasePage)
     setBuildModeNote('unknown')
     setSigningBadge('unknown')
-    setStatus(`Could not load preview metadata automatically. Open ${fallbackReleasePage}.`)
+    setStatus('Could not load preview metadata automatically. Try the main download button above.')
   }
 }
 
