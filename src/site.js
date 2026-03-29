@@ -6,17 +6,39 @@ const repo = (() => {
 })()
 
 const latestReleaseUrl = `https://api.github.com/repos/${repo}/releases/latest`
-const fallbackReleasePage = `https://github.com/${repo}/releases/latest`
 const latestManifestUrl = '/download/latest/manifest.json'
 const signingBadge = document.getElementById('release-signing-badge')
+const analyticsTimeoutMs = 300
 
-function trackEvent(name, props = {}) {
-  if (!window.zaraz || typeof window.zaraz.track !== 'function') return
-  window.zaraz.track(name, props)
+async function trackEvent(name, props = {}) {
+  if (!window.zaraz || typeof window.zaraz.track !== 'function') return false
+
+  try {
+    await window.zaraz.track(name, props)
+    return true
+  } catch {
+    return false
+  }
+}
+
+function wait(ms) {
+  return new Promise((resolve) => window.setTimeout(resolve, ms))
+}
+
+function isPrimaryNavigationClick(event, link) {
+  const target = (link.getAttribute('target') || '').toLowerCase()
+  return (
+    event.button === 0
+    && !event.metaKey
+    && !event.ctrlKey
+    && !event.shiftKey
+    && !event.altKey
+    && (target === '' || target === '_self')
+  )
 }
 
 function setupAnalyticsTracking() {
-  trackEvent('Page Loaded', { path: window.location.pathname })
+  void trackEvent('Page Loaded', { path: window.location.pathname })
 
   document.addEventListener('click', (event) => {
     const target = event.target instanceof Element ? event.target : null
@@ -25,7 +47,7 @@ function setupAnalyticsTracking() {
     const button = target.closest('button, a.btn')
     if (button) {
       const label = button.textContent ? button.textContent.trim().replace(/\s+/g, ' ').slice(0, 80) : 'unknown'
-      trackEvent('Button Click', {
+      void trackEvent('Button Click', {
         id: button.id || '',
         label
       })
@@ -46,9 +68,23 @@ function setupAnalyticsTracking() {
 
     if (!isDownload) return
     const filename = href.split('/').pop() || href || 'unknown'
-    trackEvent('Download Click', {
+    const downloadProps = {
       id: link.id || '',
-      file: filename
+      file: filename,
+      href: link.href
+    }
+
+    if (!event.cancelable || !isPrimaryNavigationClick(event, link)) {
+      void trackEvent('Download Click', downloadProps)
+      return
+    }
+
+    event.preventDefault()
+    void Promise.race([
+      trackEvent('Download Click', downloadProps),
+      wait(analyticsTimeoutMs)
+    ]).finally(() => {
+      window.location.assign(link.href)
     })
   })
 }
@@ -60,37 +96,9 @@ if (heroMascot) {
   }, { once: true })
 }
 
-function formatSize(bytes) {
-  if (!Number.isFinite(bytes)) return ''
-  const units = ['B', 'KB', 'MB', 'GB']
-  let size = bytes
-  let i = 0
-  while (size >= 1024 && i < units.length - 1) {
-    size /= 1024
-    i += 1
-  }
-  return `${size.toFixed(size >= 10 || i === 0 ? 0 : 1)} ${units[i]}`
-}
-
 function setStatus(text) {
   for (const node of document.querySelectorAll('#asset-status')) {
     node.textContent = text
-  }
-}
-
-function setBuildModeNote(mode) {
-  let note = ''
-  if (mode === 'signed+notarized') {
-    note = 'Signed + notarized release. Gatekeeper should allow standard launch.'
-  } else if (mode === 'adhoc' || mode === 'unsigned') {
-    note = 'Internal preview build without full notarization. Prefer the latest signed public release when possible.'
-  } else {
-    note = 'Release signing status unavailable. Verify that you are using the latest public release.'
-  }
-
-  for (const node of document.querySelectorAll('#build-mode-note')) {
-    node.textContent = note
-    node.classList.remove('is-hidden')
   }
 }
 
@@ -152,25 +160,6 @@ function setChecksumsLink(url) {
   node.setAttribute('href', toSafeUrl(url, current))
 }
 
-function renderAssetList(items) {
-  const assetList = document.getElementById('asset-list')
-  if (!assetList) return
-  assetList.innerHTML = ''
-  for (const itemData of items) {
-    const item = document.createElement('li')
-    item.className = 'asset-item'
-    const left = document.createElement('span')
-    left.textContent = itemData.name
-    const right = document.createElement('a')
-    right.href = toSafeUrl(itemData.url)
-    right.textContent = itemData.label
-    right.rel = 'noopener noreferrer'
-    right.target = '_blank'
-    item.append(left, right)
-    assetList.appendChild(item)
-  }
-}
-
 function formatBuildMode(mode) {
   if (mode === 'signed+notarized') return 'signed + notarized'
   if (mode === 'adhoc') return 'ad-hoc preview'
@@ -216,14 +205,9 @@ async function hydrateReleaseAssets() {
         || manifestAssets.find((item) => item.name.toLowerCase().endsWith('.dmg'))
       setLatestDmg(preferredDmg?.url)
       setChecksumsLink(manifest.checksumsFile)
-
-      if (manifestAssets.length > 0) {
-        renderAssetList(manifestAssets)
-      }
       const version = manifest.releaseTag || manifest.version || 'latest'
       const modeLabel = formatBuildMode(modeKey)
       setStatus(modeLabel ? `Latest preview ${version} (${modeLabel})` : `Latest preview ${version}`)
-      setBuildModeNote(modeKey)
       setSigningBadge(modeKey)
       return
     }
@@ -246,20 +230,10 @@ async function hydrateReleaseAssets() {
     }
     setChecksumsLink(checksumsAsset?.browser_download_url)
 
-    renderAssetList(
-      assets.map((asset) => ({
-        name: asset.name,
-        url: asset.browser_download_url,
-        label: `Download ${formatSize(asset.size)}`
-      }))
-    )
-
     const version = release.tag_name || 'latest'
-    setBuildModeNote('unknown')
     setSigningBadge('unknown')
     setStatus(`Latest preview ${version}`)
   } catch (err) {
-    setBuildModeNote('unknown')
     setSigningBadge('unknown')
     setStatus('Could not load preview metadata automatically. Try the main download button above.')
   }

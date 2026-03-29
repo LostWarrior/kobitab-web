@@ -332,9 +332,44 @@ a:focus-visible, button:focus-visible {
 /* Bento Grid */
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: var(--s-6);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--s-8);
   margin-bottom: var(--s-16);
+}
+
+.feature-card {
+  min-height: 250px;
+  padding: clamp(1.6rem, 3vw, 2.1rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.feature-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1.4rem;
+}
+
+.feature-icon {
+  font-size: 1.8rem;
+  line-height: 1;
+  flex-shrink: 0;
+}
+
+.feature-card h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.6vw, 1.45rem);
+  line-height: 1.2;
+  margin: 0;
+  color: #141F18;
+}
+
+.feature-copy {
+  font-size: 1rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
 }
 
 /* Setup Card */
@@ -344,6 +379,8 @@ a:focus-visible, button:focus-visible {
   gap: var(--s-12);
   align-items: center;
   margin-bottom: var(--s-16);
+  width: 100%;
+  padding: clamp(2rem, 5vw, 3rem);
 }
 
 .step {
@@ -422,41 +459,25 @@ a:focus-visible, button:focus-visible {
   margin-top: var(--s-4);
 }
 
-.distribution-grid {
-  display: grid;
-  grid-template-columns: minmax(320px, 1fr) minmax(320px, 1fr);
-  gap: var(--s-6);
-  margin-bottom: var(--s-16);
-  align-items: start;
+.distribution-card {
+  width: 100%;
+  max-width: none;
+  margin: 0 0 var(--s-16);
+  padding: clamp(2rem, 5vw, 3rem);
 }
 
-.distribution-left {
-  display: grid;
-  gap: var(--s-6);
+.distribution-card .code-panel {
+  margin-top: 1.5rem;
+  padding: 1.5rem 1.75rem;
 }
 
-.asset-item {
-  display: flex;
-  justify-content: space-between;
-  gap: var(--s-4);
-  padding: var(--s-3);
-  background: var(--bg-surface);
-  border: 1px solid rgba(0, 0, 0, 0.03);
-  border-radius: var(--r-lg);
-  font-size: 0.85rem;
-}
-
-.note {
-  margin-top: var(--s-4);
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  line-height: 1.45;
+.distribution-card .code-panel code {
+  font-size: 0.95rem;
 }
 
 /* Responsive */
 @media (max-width: 800px) {
   .setup-card { grid-template-columns: 1fr; }
-  .distribution-grid { grid-template-columns: 1fr; }
   .hero { padding-top: var(--s-12); }
   .hero-mascot {
     width: clamp(66px, 16vw, 88px);
@@ -467,40 +488,6 @@ a:focus-visible, button:focus-visible {
     flex-wrap: wrap;
     justify-content: flex-end;
   }
-}
-
-/* Security Mockup */
-.macos-dialog {
-  background: white;
-  border-radius: var(--r-lg);
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  padding: 1rem;
-  text-align: left;
-  max-width: 320px;
-  margin: 0 auto;
-}
-
-.dialog-content {
-  display: flex;
-  gap: 0.75rem;
-}
-
-.dialog-icon {
-  font-size: 1.5rem;
-  flex-shrink: 0;
-}
-
-.dialog-title {
-  font-size: 0.85rem;
-  font-weight: 700;
-  color: var(--text-primary);
-  margin-bottom: 0.25rem;
-}
-
-.dialog-message {
-  font-size: 0.75rem;
-  color: var(--text-muted);
-  line-height: 1.3;
 }
 
 .is-hidden { display: none; }
