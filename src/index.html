@@ -62,7 +62,7 @@
           <img id="hero-mascot" class="hero-mascot" src="./squirrel-mascot-web.png" alt="" aria-hidden="true" decoding="async" />
         </div>
         <p class="subheadline">
-          Kobi is the private search layer for the links, notes, and files buried across your digital life, so you can pick up the thread without the usual digging.
+          Everything you've saved, searchable in seconds. On your Mac, never the cloud.
         </p>
         
         <div class="hero-actions">
@@ -72,30 +72,30 @@
           <a href="#setup" class="btn btn-secondary">Setup Guide</a>
         </div>
         
-        <p id="asset-status" class="status-text">Loading latest preview metadata...</p>
+
       </section>
 
       <div class="bento-grid">
         <article class="card glass-effect feature-card">
           <div class="feature-card-header">
             <div class="feature-icon" aria-hidden="true">⏱️</div>
-            <h3>Find it fast</h3>
+            <h3>Find it in seconds</h3>
           </div>
-          <p class="feature-copy">Bring back the link, note, or file you need before the moment moves on.</p>
+          <p class="feature-copy">One keystroke. The link, note, or file you need — before the moment moves on.</p>
         </article>
         <article class="card glass-effect feature-card">
           <div class="feature-card-header">
             <div class="feature-icon" aria-hidden="true">🧠</div>
-            <h3>Get the answer</h3>
+            <h3>Ask, don't search</h3>
           </div>
-          <p class="feature-copy">Surface the key detail, the quick summary, or the next step without bouncing across tabs.</p>
+          <p class="feature-copy">Get the answer from your own content. Kobi reads what you've saved so you don't have to.</p>
         </article>
         <article class="card glass-effect feature-card">
           <div class="feature-card-header">
             <div class="feature-icon" aria-hidden="true">📚</div>
-            <h3>Make it stick</h3>
+            <h3>Your second brain, actually useful</h3>
           </div>
-          <p class="feature-copy">Turn saved links, notes, and loose files into something you can return to and actually use.</p>
+          <p class="feature-copy">Everything you've collected, organised and surfaced when it matters.</p>
         </article>
       </div>
 
@@ -127,25 +127,36 @@
           </div>
         </div>
 
-        <div class="terminal shadow-float">
-          <div class="terminal-header">
-            <span class="terminal-dot" style="background: #ff5f56;"></span>
-            <span class="terminal-dot" style="background: #ffbd2e;"></span>
-            <span class="terminal-dot" style="background: #27c93f;"></span>
+        <div class="search-preview shadow-float">
+          <div class="search-preview-bar">
+            <svg class="search-preview-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 100 11 5.5 5.5 0 000-11zM2 9a7 7 0 1112.45 4.38l3.09 3.08a.75.75 0 11-1.06 1.06l-3.09-3.08A7 7 0 012 9z" clip-rule="evenodd"/></svg>
+            <span class="search-preview-input">that API rate-limit article…</span>
           </div>
-          <div class="terminal-body">
-            <span style="color: var(--accent-verdigris); font-weight: 700;">$</span> choose your setup<br>
-            <span style="color: var(--text-muted);">local model, connected provider, or skip for now</span><br><br>
-            <span style="color: var(--accent-verdigris); font-weight: 700;">$</span> bring in your sources<br>
-            <span style="color: var(--text-muted);">links, notes, and files are ready when you are</span>
+          <div class="search-preview-results">
+            <div class="search-result-row">
+              <span class="result-tag result-tag-link">link</span>
+              <span class="result-title">Handling API Rate Limits Gracefully</span>
+              <span class="result-source">dev.to</span>
+            </div>
+            <div class="search-result-row">
+              <span class="result-tag result-tag-note">note</span>
+              <span class="result-title">Rate limiting notes – backoff strategy</span>
+              <span class="result-source">Obsidian</span>
+            </div>
+            <div class="search-result-row">
+              <span class="result-tag result-tag-file">file</span>
+              <span class="result-title">api-retry-logic.py</span>
+              <span class="result-source">~/projects</span>
+            </div>
           </div>
         </div>
       </section>
 
       <section class="distribution-card card glass-effect">
-        <h2 style="font-family: var(--font-display); font-size: 1.75rem; margin-bottom: 1rem;">Install with Homebrew</h2>
-        <p style="color: var(--text-secondary); margin-bottom: 1rem; font-size: 0.95rem;">
-          Prefer a simple install? Use Homebrew for the latest notarized release. Use the main button above if you want the current preview build instead.
+        <span class="install-label">Stable Release</span>
+        <h2 class="install-heading">Install with Homebrew</h2>
+        <p class="install-description">
+          The signed, notarized build — one command away. Use the download button above for the latest preview instead.
         </p>
         <div class="code-panel">
           <code>brew tap LostWarrior/kobitab</code>
@@ -154,12 +165,15 @@
       </section>
     </main>
 
-    <footer style="padding: 4rem 0; border-top: 1px solid rgba(0,0,0,0.05);">
-      <div class="container" style="display: flex; justify-content: space-between; align-items: center; color: var(--text-muted); font-size: 0.85rem;">
-        <p>© 2026 KobiTab • Private by default</p>
-        <div style="display: flex; gap: 1.5rem;">
-          <a href="https://github.com/__GITHUB_REPOSITORY__" style="color: inherit; text-decoration: none;">GitHub</a>
-          <a id="checksums-link" href="#" style="color: inherit; text-decoration: none;">Checksums</a>
+    <footer class="footer">
+      <div class="container footer-content">
+        <div class="footer-left">
+          <p class="footer-copyright">© 2026 KobiTab</p>
+          <p class="footer-tagline">Private search for curious people.</p>
+        </div>
+        <div class="footer-links">
+          <a href="https://github.com/__GITHUB_REPOSITORY__" class="footer-link">GitHub</a>
+          <a id="checksums-link" href="#" class="footer-link">Checksums</a>
         </div>
       </div>
     </footer>
