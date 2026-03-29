@@ -96,11 +96,7 @@ if (heroMascot) {
   }, { once: true })
 }
 
-function setStatus(text) {
-  for (const node of document.querySelectorAll('#asset-status')) {
-    node.textContent = text
-  }
-}
+
 
 function setSigningBadge(mode) {
   if (!signingBadge) return
@@ -147,7 +143,7 @@ function getCurrentHref(id) {
 function setLatestDmg(url) {
   const current = getCurrentHref('download-dmg-link')
   const href = toSafeUrl(url, current)
-  for (const id of ['download-dmg-link', 'download-latest-link']) {
+  for (const id of ['download-dmg-link', 'download-latest-link', 'download-dmg-link-bottom']) {
     const node = document.getElementById(id)
     if (node) node.setAttribute('href', href)
   }
@@ -205,9 +201,6 @@ async function hydrateReleaseAssets() {
         || manifestAssets.find((item) => item.name.toLowerCase().endsWith('.dmg'))
       setLatestDmg(preferredDmg?.url)
       setChecksumsLink(manifest.checksumsFile)
-      const version = manifest.releaseTag || manifest.version || 'latest'
-      const modeLabel = formatBuildMode(modeKey)
-      setStatus(modeLabel ? `Latest preview ${version} (${modeLabel})` : `Latest preview ${version}`)
       setSigningBadge(modeKey)
       return
     }
@@ -232,10 +225,8 @@ async function hydrateReleaseAssets() {
 
     const version = release.tag_name || 'latest'
     setSigningBadge('unknown')
-    setStatus(`Latest preview ${version}`)
   } catch (err) {
     setSigningBadge('unknown')
-    setStatus('Could not load preview metadata automatically. Try the main download button above.')
   }
 }
 

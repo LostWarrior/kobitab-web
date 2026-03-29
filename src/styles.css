@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Geist:wght@300..900&family=JetBrains+Mono:wght@400;500&display=swap');
+@import url('https://cdn.jsdelivr.net/npm/geist@1/dist/fonts/geist-sans/style.css');
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&display=swap');
 
 :root {
   /* Design Tokens - System */
@@ -328,6 +329,106 @@ a:focus-visible, button:focus-visible {
 @keyframes mascot-bob {
   0%, 100% { transform: translateY(0) rotate(-2deg); }
   50% { transform: translateY(-8px) rotate(1.5deg); }
+}
+
+/* Section Headings */
+.section-heading {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 3.5vw, 2.2rem);
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: var(--s-8);
+  letter-spacing: -0.02em;
+}
+
+/* Differentiator Section */
+.differentiator-section {
+  padding: var(--s-12) 0;
+}
+
+.diff-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--s-6);
+}
+
+.diff-item {
+  padding: var(--s-6) var(--s-8);
+  border-radius: var(--r-lg);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.diff-item:hover {
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-float);
+}
+
+.diff-item h4 {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--accent-verdigris);
+  margin-bottom: 0.5rem;
+}
+
+.diff-item p {
+  font-size: 0.92rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* Trust Section */
+.trust-section {
+  padding: var(--s-12) 0 var(--s-8);
+}
+
+.trust-content {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.trust-icon {
+  font-size: 2.5rem;
+  margin-bottom: var(--s-4);
+}
+
+.trust-copy {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: var(--s-6);
+}
+
+.trust-badges {
+  display: flex;
+  justify-content: center;
+  gap: var(--s-3);
+  flex-wrap: wrap;
+}
+
+.trust-badge {
+  display: inline-flex;
+  padding: 0.3rem 0.75rem;
+  background: rgba(15, 118, 110, 0.08);
+  color: var(--accent-verdigris);
+  border: 1px solid rgba(15, 118, 110, 0.15);
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+/* Bottom CTA */
+.bottom-cta {
+  text-align: center;
+  padding: var(--s-12) 0 var(--s-16);
+}
+
+.bottom-cta-copy {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  margin-bottom: var(--s-8);
 }
 
 /* Bento Grid */
