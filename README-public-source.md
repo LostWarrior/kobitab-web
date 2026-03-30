@@ -1,6 +1,6 @@
-# KobiTab - Intelligent Bookmark Manager
+# Kobitab - Intelligent Bookmark Manager
 
-KobiTab is a privacy-first, local-only bookmark manager for macOS.
+Kobitab is a privacy-first, local-only bookmark manager for macOS.
 
 ## Highlights
 
@@ -8,6 +8,9 @@ KobiTab is a privacy-first, local-only bookmark manager for macOS.
 - Fast search and organization
 - Reader safety guardrails
 - Ongoing browser sync improvements
+- Talk to your bookmarks, notes and files with AI
+- AI setup that fits you
+- Privacy-first, local-first
 
 ## Downloads
 

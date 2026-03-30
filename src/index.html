@@ -4,20 +4,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>KobiTab | Your private second brain.</title>
+  <title>Kobitab | Your private second brain.</title>
   <meta name="description"
-    content="KobiTab is a private second brain for macOS. Search across your links, notes, and files, then use the AI setup that fits you." />
+    content="Kobitab is a private second brain for macOS. Search across your links, notes, and files, then use the AI setup that fits you." />
   <link rel="canonical" href="https://kobitab.com/" />
 
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://kobitab.com/" />
-  <meta property="og:title" content="KobiTab | Your private second brain." />
+  <meta property="og:title" content="Kobitab | Your private second brain." />
   <meta property="og:description"
     content="Search across your links, notes, and files, then use the AI setup that fits you." />
-  <meta property="og:site_name" content="KobiTab" />
+  <meta property="og:site_name" content="Kobitab" />
 
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="KobiTab | Your private second brain." />
+  <meta name="twitter:title" content="Kobitab | Your private second brain." />
   <meta name="twitter:description"
     content="Search across your links, notes, and files, then use the AI setup that fits you." />
 
@@ -30,6 +30,14 @@
 
   <link rel="icon" type="image/png" href="./icon.png" />
   <link rel="stylesheet" href="./styles.css" />
+  <script>
+    (function () {
+      const theme = localStorage.getItem('theme');
+      if (theme) {
+        document.documentElement.setAttribute('data-theme', theme);
+      }
+    })();
+  </script>
 </head>
 
 <body>
@@ -42,12 +50,22 @@
     <div class="nav-content container">
       <a href="/" class="brand">
         <img src="./squirrel-mascot-web.png" alt="" aria-hidden="true" class="brand-mark" />
-        <span>KobiTab</span>
+        <span>Kobitab</span>
       </a>
       <div class="nav-links">
-        <span id="release-signing-badge" class="release-signing-badge release-signing-badge-unknown">
+        <button id="theme-toggle" class="theme-toggle stat-label" aria-label="Toggle dark mode">
+          <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.99 4.58a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0s.39-1.03 0-1.41L5.99 4.58zm12.37 12.37a.996.996 0 00-1.41 0 .996.996 0 000 1.41l1.06 1.06c.39.39 1.03.39 1.41 0a.996.996 0 000-1.41l-1.06-1.06zm1.06-10.96a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06zM7.05 18.36a.996.996 0 000-1.41.996.996 0 00-1.41 0l-1.06 1.06c-.39.39-.39 1.03 0 1.41s1.03.39 1.41 0l1.06-1.06z" />
+          </svg>
+          <!-- <svg class="moon-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12 3c-4.97 0-9 4.03-9 9s4.03 9 9 9 9-4.03 9-9c0-.46-.04-.92-.1-1.36-.98 1.37-2.58 2.26-4.4 2.26-3.03 0-5.5-2.47-5.5-5.5 0-1.82.89-3.42 2.26-4.4-.44-.06-.9-.1-1.36-.1z" />
+          </svg> -->
+        </button>
+        <!-- <span id="release-signing-badge" class="release-signing-badge release-signing-badge-unknown">
           Signing status: checking
-        </span>
+        </span> -->
         <a class="github-link" href="https://github.com/__GITHUB_REPOSITORY__" target="_blank"
           rel="noopener noreferrer">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
@@ -88,14 +106,14 @@
       <article class="card glass-effect feature-card">
         <div class="feature-card-header">
           <div class="feature-icon" aria-hidden="true">⏱️</div>
-          <h3>Find it fast</h3>
+          <h4 class="stat-label">Find it fast</h4>
         </div>
         <p class="feature-copy">One keystroke. The link, note, or file you need — before the moment moves on.</p>
       </article>
       <article class="card glass-effect feature-card">
         <div class="feature-card-header">
           <div class="feature-icon" aria-hidden="true">🧠</div>
-          <h3>Ask, don't search</h3>
+          <h4 class="stat-label">Ask, don't search</h4>
         </div>
         <p class="feature-copy">Get the answer from your own content. Kobi reads what you've saved so you don't have to.
         </p>
@@ -103,7 +121,7 @@
       <article class="card glass-effect feature-card">
         <div class="feature-card-header">
           <div class="feature-icon" aria-hidden="true">📚</div>
-          <h3>Your second brain, actually useful</h3>
+          <h4 class="stat-label">Your second brain</h4>
         </div>
         <p class="feature-copy">Everything you've collected, organised and surfaced when it matters.</p>
       </article>
@@ -112,34 +130,98 @@
     <section class="differentiator-section">
       <h2 class="section-heading">Why not just use…</h2>
       <div class="diff-grid">
-        <div class="diff-item glass-effect">
-          <h4>Spotlight?</h4>
-          <p>Great for opening apps. Not great when the thing you need is a link you saved three weeks ago, buried in a browser you've already closed.</p>
-        </div>
-        <div class="diff-item glass-effect">
-          <h4>Browser bookmarks?</h4>
-          <p>You'd have to remember which browser, which folder, and what you named it. Kobi searches by content, not by what you remembered to label.</p>
-        </div>
-        <div class="diff-item glass-effect">
-          <h4>A note app?</h4>
-          <p>Notes are great for writing. But your saved links, PDFs, and project files live elsewhere. Kobi connects the dots across all of them.</p>
-        </div>
+        <article class="card glass-effect diff-item">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+            <span style="font-size: 1.5rem;" aria-hidden="true">🔍</span>
+            <h4 class="stat-label" style="margin: 0;">Spotlight?</h4>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; gap: 0.5rem; color: var(--text-muted); font-size: 0.88rem;">
+              <span>✕</span>
+              <p>Great for apps, but loses your web history the moment you close a tab.</p>
+            </div>
+            <div
+              style="display: flex; gap: 0.5rem; color: var(--accent-verdigris); font-weight: 500; font-size: 0.92rem;">
+              <span>✓</span>
+              <p>Kobi makes history truly searchable. Did you know you can talk to your history?</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card glass-effect diff-item">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+            <span style="font-size: 1.5rem;" aria-hidden="true">⭐</span>
+            <h4 class="stat-label" style="margin: 0;">Bookmarks?</h4>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; gap: 0.5rem; color: var(--text-muted); font-size: 0.88rem;">
+              <span>✕</span>
+              <p>Manual labeling is a chore. If you forget to tag it, it's gone forever.</p>
+            </div>
+            <div
+              style="display: flex; gap: 0.5rem; color: var(--accent-verdigris); font-weight: 500; font-size: 0.92rem;">
+              <span>✓</span>
+              <p>Zero organization required. Kobi finds what you need based on what you remember.</p>
+            </div>
+          </div>
+        </article>
+
+        <article class="card glass-effect diff-item">
+          <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1.25rem;">
+            <span style="font-size: 1.5rem;" aria-hidden="true">📝</span>
+            <h4 class="stat-label" style="margin: 0;">A note app?</h4>
+          </div>
+          <div style="display: flex; flex-direction: column; gap: 1rem;">
+            <div style="display: flex; gap: 0.5rem; color: var(--text-muted); font-size: 0.88rem;">
+              <span>✕</span>
+              <p>Notes are silos. They don't know about your PDFs or files elsewhere.</p>
+            </div>
+            <div
+              style="display: flex; gap: 0.5rem; color: var(--accent-verdigris); font-weight: 500; font-size: 0.92rem;">
+              <span>✓</span>
+              <p>The bridge between your notes and everything else you own.</p>
+            </div>
+          </div>
+        </article>
       </div>
     </section>
 
-    <section class="trust-section">
-      <div class="trust-content">
-        <div class="trust-icon" aria-hidden="true">🔒</div>
-        <h2 class="section-heading">Your data never leaves your Mac.</h2>
-        <p class="trust-copy">No accounts. No cloud sync. No telemetry on your content. Kobi indexes everything locally and the code is open source — inspect every line on GitHub.</p>
-        <div class="trust-badges">
-          <span class="trust-badge">100% local</span>
-          <span class="trust-badge">Open source</span>
-          <span class="trust-badge">No sign-up</span>
+    <section class="trust-shield">
+      <div class="no-cloud-cross">☁️</div>
+      <div class="local-loop">
+        <div class="loop-circle"></div>
+        <span class="loop-icon">🔒</span>
+      </div>
+      <h2 class="trust-heading">Your data <span class="accent-text">never</span> leaves your Mac.</h2>
+      <p style="max-width: 600px; margin: 0 auto 2rem; color: var(--text-secondary);">
+        Kobi is built for those who value privacy over convenience. We don't have servers, we don't have accounts, and
+        we certainly don't have your data.
+      </p>
+
+      <div class="trust-grid">
+        <div class="trust-stat">
+          <span class="stat-icon">💻</span>
+          <span class="stat-label">100% Local</span>
+          <span class="stat-desc">Indexing and LLM processing happen entirely on-device.</span>
+        </div>
+        <div class="trust-stat">
+          <span class="stat-icon">⚡</span>
+          <span class="stat-label">Native Speed</span>
+          <span class="stat-desc">Optimized for Apple Silicon for near-instant results.</span>
+        </div>
+        <div class="trust-stat">
+          <span class="stat-icon">🎁</span>
+          <span class="stat-label">Free Forever</span>
+          <span class="stat-desc">No subscriptions, no hidden fees. Just great search.</span>
         </div>
       </div>
-    </section>
 
+      <a href="https://github.com/LostWarrior/Kobitab/releases/download/v0.1.21/KobiTab-0.1.21-mac-universal.dmg"
+        class="btn btn-primary" id="download-dmg-link-middle"
+        style="margin-top: 2.5rem; padding: 1rem 2.5rem; font-size: 1.1rem;">
+        Download Kobi for Free
+      </a>
+    </section>
     <section id="setup" class="setup-card card glass-effect">
       <div>
         <h2 style="font-family: var(--font-display); font-size: 2rem; margin-bottom: 1.5rem;">Get Started in a Minute
@@ -217,7 +299,9 @@
       <h2 class="section-heading">Ready to remember everything?</h2>
       <p class="bottom-cta-copy">Free while in preview. No account required. Just download and go.</p>
       <div class="hero-actions">
-        <a id="download-dmg-link-bottom" href="https://github.com/LostWarrior/Kobitab/releases/download/v0.1.21/KobiTab-0.1.21-mac-universal.dmg" class="btn btn-primary">
+        <a id="download-dmg-link-bottom"
+          href="https://github.com/LostWarrior/Kobitab/releases/download/v0.1.21/KobiTab-0.1.21-mac-universal.dmg"
+          class="btn btn-primary">
           Download Preview for macOS
         </a>
       </div>
@@ -227,7 +311,7 @@
   <footer class="footer">
     <div class="container footer-content">
       <div class="footer-left">
-        <p class="footer-copyright">© 2026 KobiTab</p>
+        <p class="footer-copyright">© 2026 Kobitab</p>
         <p class="footer-tagline">Private search for curious people.</p>
       </div>
       <div class="footer-links">

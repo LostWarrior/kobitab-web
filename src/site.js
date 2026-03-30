@@ -65,6 +65,8 @@ function setupAnalyticsTracking() {
       || lowerHref.endsWith('checksums.txt')
       || lowerHref.includes('/download/homebrew/')
       || link.id === 'download-dmg-link'
+      || link.id === 'download-dmg-link-middle'
+      || link.id === 'download-dmg-link-bottom'
 
     if (!isDownload) return
     const filename = href.split('/').pop() || href || 'unknown'
@@ -230,5 +232,27 @@ async function hydrateReleaseAssets() {
   }
 }
 
+function setupThemeToggle() {
+  const themeToggle = document.getElementById('theme-toggle');
+  if (!themeToggle) return;
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = document.documentElement.getAttribute('data-theme');
+    let newTheme;
+
+    if (currentTheme) {
+      newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+    } else {
+      // If no explicit theme, check system preference
+      const isSystemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      newTheme = isSystemDark ? 'light' : 'dark';
+    }
+
+    document.documentElement.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+  });
+}
+
 hydrateReleaseAssets()
 setupAnalyticsTracking()
+setupThemeToggle()
