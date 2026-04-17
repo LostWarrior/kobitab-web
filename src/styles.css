@@ -799,6 +799,193 @@ button:focus-visible {
   font-size: 0.95rem;
 }
 
+/* Waitlist */
+.waitlist-center-cta {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 2.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: var(--r-lg);
+  border: 0px solid var(--border-glass);
+  background: var(--bg-surface);
+  box-shadow: var(--shadow-soft);
+}
+
+.waitlist-inline-copy {
+  display: grid;
+  gap: 0.35rem;
+  text-align: left;
+}
+
+.waitlist-inline-kicker {
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--accent-verdigris);
+}
+
+.waitlist-inline-text {
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--text-secondary);
+  max-width: 36rem;
+}
+
+.waitlist-inline-button {
+  flex-shrink: 0;
+}
+
+.waitlist-card {
+  align-items: center;
+  width: 100%;
+  margin: var(--s-16) 0 var(--s-12);
+  padding: clamp(2rem, 5vw, 3rem);
+}
+
+.waitlist-copy {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.waitlist-points {
+  display: grid;
+  gap: 0.85rem;
+  margin-top: 0.5rem;
+}
+
+.waitlist-point {
+  display: grid;
+  gap: 0.2rem;
+  padding: 0.9rem 1rem;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-glass);
+  background: var(--bg-surface);
+}
+
+.waitlist-point strong {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+.waitlist-point span {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.waitlist-label {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.waitlist-row {
+  display: flex;
+  gap: 0.75rem;
+  align-items: stretch;
+}
+
+.waitlist-input-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 0;
+}
+
+[data-waitlist-inline-hint] {
+  display: none !important;
+}
+
+.waitlist-input {
+  width: 100%;
+  padding: 0.95rem 1rem;
+  border-radius: var(--r-md);
+  border: 1px solid var(--border-glass);
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  font: inherit;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.waitlist-input::placeholder {
+  color: var(--text-muted);
+}
+
+.waitlist-input:focus {
+  outline: none;
+  border-color: rgba(15, 118, 110, 0.6);
+  box-shadow: 0 0 0 4px rgba(15, 118, 110, 0.12);
+}
+
+.waitlist-input:disabled {
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.waitlist-form[data-status="success"] .waitlist-input {
+  border-color: rgba(15, 118, 110, 0.5);
+  box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.1);
+}
+
+.waitlist-form[data-status="error"] .waitlist-input {
+  border-color: rgba(141, 95, 39, 0.6);
+  box-shadow: 0 0 0 3px rgba(141, 95, 39, 0.1);
+}
+
+.waitlist-form[data-email-invalid="true"] .waitlist-input {
+  border-color: rgba(141, 95, 39, 0.6);
+  box-shadow: 0 0 0 3px rgba(141, 95, 39, 0.1);
+}
+
+.waitlist-form[data-status="success"] .waitlist-submit {
+  background: linear-gradient(135deg, #19877e, var(--accent-verdigris));
+}
+
+.waitlist-form[data-status="error"] .waitlist-submit {
+  background: linear-gradient(135deg, #b44b3a, #d44f3d);
+  color: #fff;
+}
+
+.waitlist-submit {
+  white-space: nowrap;
+  min-width: 10rem;
+}
+
+.waitlist-submit:disabled {
+  cursor: default;
+  opacity: 1;
+}
+
+.waitlist-status {
+  min-height: 1.25rem;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  margin-top: 0.75rem;
+  line-height: 1.45;
+  transition: color 0.2s ease;
+}
+
+.waitlist-status[data-tone="success"] {
+  color: var(--accent-verdigris);
+  font-weight: 600;
+}
+
+.waitlist-status[data-tone="error"] {
+  color: var(--accent-brass);
+  font-weight: 600;
+}
+
+.waitlist-note {
+  font-size: 0.82rem;
+  line-height: 1.5;
+  color: var(--text-muted);
+}
+
+.waitlist-status:not(:empty) + .waitlist-note {
+  display: none;
+}
+
 /* Footer */
 .footer {
   padding: 3rem 0;
@@ -845,6 +1032,24 @@ button:focus-visible {
 @media (max-width: 800px) {
   .setup-card {
     grid-template-columns: 1fr;
+  }
+
+  .waitlist-card {
+    grid-template-columns: 1fr;
+  }
+
+  .waitlist-inline-cta {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .waitlist-row {
+    flex-direction: column;
+  }
+
+  .waitlist-submit {
+    width: 100%;
+    min-width: 0;
   }
 
   .hero {

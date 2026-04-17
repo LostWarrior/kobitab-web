@@ -13,7 +13,7 @@ mkdirSync(distDir, { recursive: true })
 // Publish all static files from src so media assets are available at runtime.
 cpSync(srcDir, distDir, { recursive: true })
 
-const appReleaseRepo = process.env.APP_RELEASE_REPO || 'LostWarrior/Kobitab'
+const appReleaseRepo = 'LostWarrior/Kobitab'
 
 function collectFiles(dir) {
   const entries = readdirSync(dir)

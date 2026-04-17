@@ -4,7 +4,7 @@ import { dirname, extname, join, resolve } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const distDir = resolve(dirname(fileURLToPath(import.meta.url)), '..', 'dist')
-const port = process.env.PORT || 3000
+const port = 3000
 
 const mimeTypes = {
   '.html': 'text/html',
