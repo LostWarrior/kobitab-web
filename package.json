@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "node scripts/build-site.mjs",
-    "dev": "node scripts/build-site.mjs && node scripts/serve.mjs"
+    "dev": "node scripts/build-site.mjs && node scripts/serve.mjs",
+    "test": "node --test tests/waitlist.test.js",
+    "lint": "node --check src/site.js src/waitlist.js tests/waitlist.test.js"
   }
 }

@@ -22,7 +22,7 @@
     content="Search across your links, notes, and files, then use the AI setup that fits you." />
 
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'none'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://api.github.com https://cloudflareinsights.com 'self'; img-src 'self' data:;" />
+    content="default-src 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://api.github.com https://cloudflareinsights.com 'self'; img-src 'self' data:;" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -66,8 +66,8 @@
         <!-- <span id="release-signing-badge" class="release-signing-badge release-signing-badge-unknown">
           Signing status: checking
         </span> -->
-        <a class="github-link" href="https://github.com/__GITHUB_REPOSITORY__" target="_blank"
-          rel="noopener noreferrer">
+        <a id="github-link-nav" class="github-link" href="https://github.com/__GITHUB_REPOSITORY__" target="_blank"
+          rel="noopener noreferrer" data-analytics-location="nav">
           <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
             <path
               d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.1.79-.25.79-.56v-1.95c-3.2.7-3.87-1.54-3.87-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.06-.73.08-.72.08-.72 1.17.08 1.78 1.2 1.78 1.2 1.04 1.79 2.74 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.72 0-1.26.45-2.29 1.2-3.1-.12-.3-.52-1.5.11-3.12 0 0 .98-.31 3.2 1.19a11.15 11.15 0 0 1 5.83 0c2.22-1.5 3.2-1.2 3.2-1.2.63 1.62.23 2.82.11 3.12.75.81 1.2 1.84 1.2 3.1 0 4.45-2.7 5.42-5.28 5.7.42.37.79 1.08.79 2.18v3.23c0 .31.21.67.8.56 4.56-1.54 7.86-5.86 7.86-10.96C23.5 5.66 18.35.5 12 .5Z" />
@@ -93,7 +93,7 @@
       <div class="hero-actions">
         <a id="download-dmg-link"
           href="https://github.com/LostWarrior/Kobitab/releases/download/v0.1.21/KobiTab-0.1.21-mac-universal.dmg"
-          class="btn btn-primary">
+          class="btn btn-primary" data-analytics-location="hero">
           Download Preview for macOS
         </a>
         <a href="#setup" class="btn btn-secondary">Setup Guide</a>
@@ -216,11 +216,16 @@
         </div>
       </div>
 
-      <a href="https://github.com/LostWarrior/Kobitab/releases/download/v0.1.21/KobiTab-0.1.21-mac-universal.dmg"
-        class="btn btn-primary" id="download-dmg-link-middle"
-        style="margin-top: 2.5rem; padding: 1rem 2.5rem; font-size: 1.1rem;">
-        Download Kobi for Free
-      </a>
+      <div class="waitlist-inline-cta">
+        <div class="waitlist-inline-copy">
+          <p class="waitlist-inline-kicker">Premium waitlist</p>
+          <p class="waitlist-inline-text">Preview stays free. Join the list for premium features, launch notes, and early access.</p>
+        </div>
+        <a href="#waitlist" class="btn btn-primary waitlist-inline-button" data-analytics-location="trust"
+          data-waitlist-cta="trust">
+          Join waitlist
+        </a>
+      </div>
     </section>
     <section id="setup" class="setup-card card glass-effect">
       <div>
@@ -295,16 +300,46 @@
       </div>
     </section>
 
-    <section class="bottom-cta">
-      <h2 class="section-heading">Ready to remember everything?</h2>
-      <p class="bottom-cta-copy">Free while in preview. No account required. Just download and go.</p>
-      <div class="hero-actions">
-        <a id="download-dmg-link-bottom"
-          href="https://github.com/LostWarrior/Kobitab/releases/download/v0.1.21/KobiTab-0.1.21-mac-universal.dmg"
-          class="btn btn-primary">
-          Download Preview for macOS
-        </a>
+    <section id="waitlist" class="waitlist-card card glass-effect">
+      <div class="waitlist-copy">
+        <span class="install-label">Premium waitlist</span>
+        <h2 class="install-heading">Be first in line for premium features</h2>
+        <p class="install-description">
+          Kobi Preview stays free today. Drop your email and we’ll send early access, launch pricing, and release
+          notes when premium is ready.
+        </p>
+        <div class="waitlist-points" aria-hidden="true">
+          <div class="waitlist-point">
+            <strong>Early access</strong>
+            <span>Get invited before we open premium publicly.</span>
+          </div>
+          <div class="waitlist-point">
+            <strong>Attribution</strong>
+            <span>We keep landing page and campaign context with each signup.</span>
+          </div>
+          <div class="waitlist-point">
+            <strong>Privacy</strong>
+            <span>Email only. No passwords, accounts, or credit cards.</span>
+          </div>
+        </div>
       </div>
+
+      <form class="waitlist-form" data-waitlist-form data-waitlist-placement="footer-cta" action="/api/waitlist"
+        method="post" novalidate>
+        <label class="waitlist-label" for="waitlist-email">Email address</label>
+        <div class="waitlist-row">
+          <input id="waitlist-email" class="waitlist-input" name="email" type="email" autocomplete="email"
+            inputmode="email" placeholder="you@example.com" required />
+          <button class="btn btn-primary waitlist-submit" type="submit" data-analytics-skip="true">
+            Join waitlist
+          </button>
+        </div>
+        <p class="waitlist-status" data-waitlist-status aria-live="polite"></p>
+        <p class="waitlist-note">
+          We store your email plus minimal attribution like the page you landed on and the campaign that brought you
+          here.
+        </p>
+      </form>
     </section>
   </main>
 
@@ -315,13 +350,14 @@
         <p class="footer-tagline">Private search for curious people.</p>
       </div>
       <div class="footer-links">
-        <a href="https://github.com/__GITHUB_REPOSITORY__" class="footer-link">GitHub</a>
+        <a id="github-link-footer" href="https://github.com/__GITHUB_REPOSITORY__" class="footer-link"
+          data-analytics-location="footer">GitHub</a>
         <a id="checksums-link" href="#" class="footer-link">Checksums</a>
       </div>
     </div>
   </footer>
 
-  <script src="./site.js" defer></script>
+  <script type="module" src="./site.js"></script>
 </body>
 
 </html>
