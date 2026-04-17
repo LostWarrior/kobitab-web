@@ -1,9 +1,0 @@
-{
-  "name": "kobitab-waitlist-api",
-  "private": true,
-  "type": "module",
-  "scripts": {
-    "test": "node --test tests/waitlist-worker.test.js",
-    "lint": "node --check src/index.js && node --check src/waitlist.js && node --check tests/waitlist-worker.test.js"
-  }
-}
