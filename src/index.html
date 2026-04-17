@@ -87,16 +87,16 @@
           decoding="async" />
       </div>
       <p class="subheadline">
-        Everything you've saved, searchable in seconds. On your Mac, never the cloud.
+        Your hidden brain, local and private.
       </p>
 
       <div class="hero-actions">
         <a id="download-dmg-link"
           href="https://github.com/LostWarrior/Kobitab/releases/download/v0.1.21/KobiTab-0.1.21-mac-universal.dmg"
           class="btn btn-primary" data-analytics-location="hero">
-          Download Preview for macOS
+          Download Preview
         </a>
-        <a href="#setup" class="btn btn-secondary">Setup Guide</a>
+        <a href="#waitlist" class="btn btn-secondary">Join waitlist</a>
       </div>
 
 
@@ -215,17 +215,6 @@
           <span class="stat-desc">No subscriptions, no hidden fees. Just great search.</span>
         </div>
       </div>
-
-      <div class="waitlist-inline-cta">
-        <div class="waitlist-inline-copy">
-          <p class="waitlist-inline-kicker">Premium waitlist</p>
-          <p class="waitlist-inline-text">Preview stays free. Join the list for premium features, launch notes, and early access.</p>
-        </div>
-        <a href="#waitlist" class="btn btn-primary waitlist-inline-button" data-analytics-location="trust"
-          data-waitlist-cta="trust">
-          Join waitlist
-        </a>
-      </div>
     </section>
     <section id="setup" class="setup-card card glass-effect">
       <div>
@@ -301,32 +290,14 @@
     </section>
 
     <section id="waitlist" class="waitlist-card card glass-effect">
+      <span class="install-label">Premium waitlist</span>
       <div class="waitlist-copy">
-        <span class="install-label">Premium waitlist</span>
-        <h2 class="install-heading">Be first in line for premium features</h2>
         <p class="install-description">
-          Kobi Preview stays free today. Drop your email and we’ll send early access, launch pricing, and release
-          notes when premium is ready.
+          Kobi Preview stays free today. Drop your email and we’ll send a note when premium is ready.
         </p>
-        <div class="waitlist-points" aria-hidden="true">
-          <div class="waitlist-point">
-            <strong>Early access</strong>
-            <span>Get invited before we open premium publicly.</span>
-          </div>
-          <div class="waitlist-point">
-            <strong>Attribution</strong>
-            <span>We keep landing page and campaign context with each signup.</span>
-          </div>
-          <div class="waitlist-point">
-            <strong>Privacy</strong>
-            <span>Email only. No passwords, accounts, or credit cards.</span>
-          </div>
-        </div>
       </div>
-
       <form class="waitlist-form" data-waitlist-form data-waitlist-placement="footer-cta" action="/api/waitlist"
         method="post" novalidate>
-        <label class="waitlist-label" for="waitlist-email">Email address</label>
         <div class="waitlist-row">
           <input id="waitlist-email" class="waitlist-input" name="email" type="email" autocomplete="email"
             inputmode="email" placeholder="you@example.com" required />

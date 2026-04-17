@@ -800,15 +800,14 @@ button:focus-visible {
 }
 
 /* Waitlist */
-.waitlist-inline-cta {
+.waitlist-center-cta {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
-  gap: var(--s-6);
   margin-top: 2.5rem;
   padding: 1.25rem 1.5rem;
   border-radius: var(--r-lg);
-  border: 1px solid var(--border-glass);
+  border: 0px solid var(--border-glass);
   background: var(--bg-surface);
   box-shadow: var(--shadow-soft);
 }
@@ -839,9 +838,6 @@ button:focus-visible {
 }
 
 .waitlist-card {
-  display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: var(--s-12);
   align-items: center;
   width: 100%;
   margin: var(--s-16) 0 var(--s-12);
@@ -877,16 +873,6 @@ button:focus-visible {
 .waitlist-point span {
   font-size: 0.9rem;
   color: var(--text-secondary);
-}
-
-.waitlist-form {
-  display: grid;
-  gap: 1rem;
-  padding: 1.25rem;
-  border-radius: var(--r-lg);
-  border: 1px solid var(--border-glass);
-  background: var(--bg-glass);
-  box-shadow: var(--shadow-soft);
 }
 
 .waitlist-label {
