@@ -986,6 +986,17 @@ button:focus-visible {
   display: none;
 }
 
+/* Rendering performance: skip heavy offscreen section rendering until needed */
+.differentiator-section,
+.trust-shield,
+.setup-card,
+.distribution-card,
+.waitlist-card,
+.footer {
+  content-visibility: auto;
+  contain-intrinsic-size: 1px 700px;
+}
+
 /* Footer */
 .footer {
   padding: 3rem 0;

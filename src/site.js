@@ -672,7 +672,20 @@ function setupWaitlistForms() {
   }
 }
 
-hydrateReleaseAssets()
-setupAnalyticsTracking()
+function scheduleNonCriticalWork() {
+  const run = () => {
+    hydrateReleaseAssets()
+    setupAnalyticsTracking()
+  }
+
+  if ('requestIdleCallback' in window) {
+    window.requestIdleCallback(run, { timeout: 1500 })
+    return
+  }
+
+  window.setTimeout(run, 0)
+}
+
+scheduleNonCriticalWork()
 setupWaitlistForms()
 setupThemeToggle()
