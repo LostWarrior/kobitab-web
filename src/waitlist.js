@@ -53,6 +53,7 @@ export function buildWaitlistAttribution({
 
 export function buildWaitlistPayload({
   email,
+  turnstileToken,
   currentUrl,
   referrer,
   sourcePage = 'premium_waitlist',
@@ -61,8 +62,13 @@ export function buildWaitlistPayload({
   const normalizedEmail = normalizeWaitlistEmail(email)
   if (!isValidWaitlistEmail(normalizedEmail)) return null
 
+  const normalizedTurnstileToken = typeof turnstileToken === 'string'
+    ? turnstileToken.trim()
+    : ''
+
   return {
     email: normalizedEmail,
+    ...(normalizedTurnstileToken ? { turnstile_token: normalizedTurnstileToken } : {}),
     attribution: {
       source_page: sourcePage,
       ...buildWaitlistAttribution({ currentUrl, referrer, placement })

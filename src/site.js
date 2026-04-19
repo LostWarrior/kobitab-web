@@ -440,6 +440,24 @@ function parseRetryAfterHeader(value) {
   return seconds > 0 ? seconds : 0
 }
 
+function getTurnstileToken(form) {
+  const selectors = [
+    'input[name="cf-turnstile-response"]',
+    'input[name="turnstile_token"]',
+    'input[name="turnstileToken"]'
+  ]
+
+  for (const selector of selectors) {
+    const node = form.querySelector(selector)
+    if (node instanceof HTMLInputElement) {
+      const value = node.value.trim()
+      if (value) return value
+    }
+  }
+
+  return ''
+}
+
 async function parseRateLimitCooldownSeconds(response) {
   if (!(response instanceof Response)) return waitlistRetryCooldownMs / 1000
 
@@ -504,6 +522,7 @@ async function postWaitlist(form) {
 
   const payload = buildWaitlistPayload({
     email: emailInput.value,
+    turnstileToken: getTurnstileToken(form),
     currentUrl: window.location.href,
     referrer: document.referrer,
     placement
@@ -531,6 +550,7 @@ async function postWaitlist(form) {
   const timeout = window.setTimeout(() => controller.abort(), waitlistRequestTimeoutMs)
   let responseStatus = 0
   let retryAfterSeconds = 0
+  let responseErrorCode = ''
 
   try {
     const response = await fetch(endpoint, {
@@ -548,6 +568,13 @@ async function postWaitlist(form) {
     if (!response.ok) {
       if (response.status === 429) {
         retryAfterSeconds = await parseRateLimitCooldownSeconds(response)
+      } else {
+        try {
+          const errorBody = await response.clone().json()
+          responseErrorCode = String(errorBody?.error?.code || '')
+        } catch {
+          responseErrorCode = ''
+        }
       }
       throw new Error(`Request failed (${response.status})`)
     }
@@ -567,6 +594,9 @@ async function postWaitlist(form) {
 
     if (isRateLimited) {
       startRetryCountdownWithSeconds(form, statusNode, payload.email, retryAfterSeconds)
+    } else if (responseErrorCode === 'turnstile_failed') {
+      setWaitlistStatus(statusNode, 'Please complete verification and try again.', 'error')
+      setWaitlistUiState(form, 'error')
     } else {
       setWaitlistStatus(statusNode, 'Something went wrong. Try again in a moment.', 'error')
       setWaitlistUiState(form, 'error')
