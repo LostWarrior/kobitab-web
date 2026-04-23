@@ -1083,6 +1083,11 @@ button:focus-visible {
     text-align: center;
     gap: 1rem;
   }
+
+  .hero > .badge,
+  #github-link-nav {
+    display: none;
+  }
 }
 
 .is-hidden {
