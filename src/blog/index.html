@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog | Kobitab</title>
+  <meta name="description" content="Notes on building private search, local software, and Kobitab." />
+  <link rel="canonical" href="https://kobitab.com/blog/" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://kobitab.com/blog/" />
+  <meta property="og:title" content="Blog | Kobitab" />
+  <meta property="og:description" content="Notes on building private search, local software, and Kobitab." />
+  <meta property="og:site_name" content="Kobitab" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Blog | Kobitab" />
+  <meta name="twitter:description" content="Notes on building private search, local software, and Kobitab." />
+
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com https://cdn.jsdelivr.net; connect-src https://api.github.com https://cloudflareinsights.com 'self'; img-src 'self' data:;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="icon" type="image/png" href="/icon.png" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <div class="background-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="nav-content container">
+      <a href="/" class="brand">
+        <img src="/squirrel-mascot-web.png" alt="" aria-hidden="true" class="brand-mark" />
+        <span>Kobitab</span>
+      </a>
+      <div class="nav-links">
+        <a href="/">Home</a>
+        <button id="theme-toggle" class="theme-toggle stat-label" aria-label="Toggle dark mode">
+          <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"
+              fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="blog-main container">
+    <header class="blog-index-header">
+      <p class="blog-eyebrow">Kobitab blog</p>
+      <h1 class="blog-title">How we build private search</h1>
+      <p class="blog-intro">Notes on retrieval, local software, privacy, and the decisions behind Kobitab.</p>
+    </header>
+
+    <section class="blog-list" aria-label="Latest posts">
+      <a class="blog-card-link" href="/blog/how-we-built-deterministic-search/">
+        <article class="blog-card card glass-effect">
+          <time datetime="2026-07-13">July 13, 2026</time>
+          <h2>How we built deterministic search</h2>
+          <p>How Kobitab builds a cited context bundle before the model writes an answer.</p>
+          <span class="blog-card-cta">Read post →</span>
+        </article>
+      </a>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <p class="footer-copyright">© 2026 Kobitab</p>
+        <p class="footer-tagline">Private search for curious people.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/" class="footer-link">Home</a>
+        <a href="https://github.com/__GITHUB_REPOSITORY__" class="footer-link">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/site.js"></script>
+</body>
+
+</html>

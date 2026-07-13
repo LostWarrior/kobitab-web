@@ -1,0 +1,289 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>How we built deterministic search | Kobitab</title>
+  <meta name="description"
+    content="How Kobitab searches, ranks, filters, and cites context before the model writes an answer." />
+  <link rel="canonical" href="https://kobitab.com/blog/how-we-built-deterministic-search/" />
+
+  <meta property="og:type" content="article" />
+  <meta property="og:url" content="https://kobitab.com/blog/how-we-built-deterministic-search/" />
+  <meta property="og:title" content="How we built deterministic search" />
+  <meta property="og:description"
+    content="How Kobitab searches, ranks, filters, and cites context before the model writes an answer." />
+  <meta property="og:site_name" content="Kobitab" />
+  <meta property="article:published_time" content="2026-07-13" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="How we built deterministic search" />
+  <meta name="twitter:description"
+    content="How Kobitab searches, ranks, filters, and cites context before the model writes an answer." />
+
+  <meta http-equiv="Content-Security-Policy"
+    content="default-src 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com https://cdn.jsdelivr.net; connect-src https://api.github.com https://cloudflareinsights.com 'self'; img-src 'self' data:;" />
+  <meta name="referrer" content="strict-origin-when-cross-origin" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+  <link rel="icon" type="image/png" href="/icon.png" />
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+
+<body>
+  <div class="background-blobs" aria-hidden="true">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+  </div>
+
+  <nav class="nav" aria-label="Primary navigation">
+    <div class="nav-content container">
+      <a href="/" class="brand">
+        <img src="/squirrel-mascot-web.png" alt="" aria-hidden="true" class="brand-mark" />
+        <span>Kobitab</span>
+      </a>
+      <div class="nav-links">
+        <a href="/blog/">Blog</a>
+        <button id="theme-toggle" class="theme-toggle stat-label" aria-label="Toggle dark mode">
+          <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="12" cy="12" r="4" />
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"
+              fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <main class="blog-main container">
+    <article>
+      <header class="article-header">
+        <p class="blog-eyebrow">Building Kobitab</p>
+        <h1 class="article-title">How we built deterministic search</h1>
+        <p class="article-dek">The model gets a cited context bundle that Kobitab has already searched, ranked, and
+          filtered on device.</p>
+        <div class="article-meta">
+          <time datetime="2026-07-13">July 13, 2026</time>
+          <span>6 min read</span>
+        </div>
+      </header>
+
+      <div class="article-body">
+        <p>We recently rebuilt how chat retrieval works in Kobitab.</p>
+
+        <p>Kobitab now gathers the evidence before the model receives a request. It searches approved sources, follows
+          explicit relationships, ranks the results, applies privacy rules, and compiles a small context bundle. The
+          model uses that bundle to write the answer.</p>
+
+        <h2>Where we started</h2>
+
+        <p>Our earlier chat flow looked roughly like this:</p>
+
+        <pre><code>User message
+  -&gt; intent classifier
+  -&gt; search over query variants
+  -&gt; first useful result set
+  -&gt; provider prompt
+  -&gt; model answer</code></pre>
+
+        <p>It worked for simple lookups. As we added calendar events, email, hosted documents, transcripts, and entity
+          relationships, it became harder to reason about. Search could settle on the first useful result set. Provider
+          prompts accumulated history and metadata. When an answer looked wrong, tracing why a source appeared took too
+          much work.</p>
+
+        <h2>The new retrieval flow</h2>
+
+        <pre><code>User message
+  -&gt; intent and entity extraction
+  -&gt; source search
+  -&gt; entity resolution
+  -&gt; bounded graph expansion
+  -&gt; ranking and deduplication
+  -&gt; privacy and budget filtering
+  -&gt; ContextBundle
+  -&gt; model answer</code></pre>
+
+        <p>Given the same user, profile, data snapshot, query, and policy, Kobitab should produce the same context bundle.
+          That bundle is the evidence available to the model.</p>
+
+        <h2>Understanding the request</h2>
+
+        <p>Say the user asks:</p>
+
+        <blockquote>What do we have for the meeting with Northstar?</blockquote>
+
+        <p>Kobitab converts the question into a structured request:</p>
+
+        <pre><code>{
+  task: "find_context",
+  entities: [
+    {
+      kind: "org",
+      text: "Northstar",
+      aliases: ["Northstar Labs", "North Star"]
+    }
+  ],
+  concepts: ["meeting"],
+  sourceHints: ["calendar", "documents", "email", "video"],
+  timeHint: null
+}</code></pre>
+
+        <p>Rules, local entity data, known aliases, and profile configuration handle this step. The result gives the
+          retrieval layer a stable search plan.</p>
+
+        <h2>Searching approved sources</h2>
+
+        <p>Kobitab searches each relevant, profile-scoped source:</p>
+
+        <ul>
+          <li>Calendar events</li>
+          <li>Local and hosted documents</li>
+          <li>Email</li>
+          <li>Video and transcript data</li>
+          <li>Bookmarks and indexed pages</li>
+        </ul>
+
+        <p>Every adapter returns the same core details: source ID, profile ID, title, timestamp, matched terms, access
+          scope, and stable scoring inputs. Search runs across the approved sources before ranking begins.</p>
+
+        <h2>Resolving relationships</h2>
+
+        <p>A direct match is usually the start. A Northstar calendar event may have attendees, attachments, related
+          documents, or a recording. Those items can lead to more evidence through explicit links.</p>
+
+        <pre><code>Northstar
+  -&gt; Northstar planning meeting
+  -&gt; attendees: Jane, Mark
+  -&gt; attached document: Q3 launch checklist
+  -&gt; linked transcript: Product walkthrough</code></pre>
+
+        <p>The graph records facts such as <code>mentions</code>, <code>created_by</code>, <code>attended_by</code>,
+          <code>attached_to</code>, and <code>links_to</code>. Every edge comes from indexed data or a configured alias.
+        </p>
+
+        <h2>Keeping expansion bounded</h2>
+
+        <p>If Jane attended the meeting, pulling in everything Jane created would add a lot of weak context. We use hard
+          limits for hops, sources, access, and result counts.</p>
+
+        <ul>
+          <li>Start with exact Northstar matches.</li>
+          <li>Include directly connected events, documents, emails, and videos.</li>
+          <li>Include people attached to those results.</li>
+          <li>Follow another link when its evidence overlaps with the original topic.</li>
+          <li>Stop when a configured cap is reached.</li>
+        </ul>
+
+        <p>The result contains useful surrounding context while staying predictable.</p>
+
+        <h2>Ranking the evidence</h2>
+
+        <p>Each candidate receives a score from explainable features:</p>
+
+        <ul>
+          <li>Exact organization and title matches</li>
+          <li>Recency and source priority</li>
+          <li>Event proximity</li>
+          <li>Author or attendee relationships</li>
+          <li>Explicit attachments and links</li>
+          <li>Query term overlap</li>
+          <li>Access confidence</li>
+        </ul>
+
+        <p>A score record looks like this:</p>
+
+        <pre><code>{
+  itemId: "doc_123",
+  score: 0.87,
+  reasons: [
+    "exact_match:northstar",
+    "linked_from_calendar_event",
+    "attendee_author_overlap",
+    "term_overlap:launch"
+  ]
+}</code></pre>
+
+        <p>The reasons help us debug retrieval and explain why an item entered the answer context.</p>
+
+        <h2>Compiling a safe context bundle</h2>
+
+        <p>The ranked results are reduced to a compact contract:</p>
+
+        <pre><code>type ContextBundle = {
+  requestId: string;
+  profileId: string;
+  query: string;
+  policy: ContextPolicy;
+  entities: ResolvedEntity[];
+  sources: ContextSource[];
+  evidence: ContextEvidence[];
+  relationships: ContextRelationship[];
+  omissions: ContextOmission[];
+};</code></pre>
+
+        <p>The bundle contains selected excerpts, citations, relationships, and omission details. Full documents, raw
+          provider payloads, hidden metadata, and unbounded database rows stay outside the prompt.</p>
+
+        <p>Omission data records what happened during compilation:</p>
+
+        <pre><code>{
+  candidatesSeen: 184,
+  omittedByBudget: 161,
+  omittedByAccess: 3
+}</code></pre>
+
+        <p>That gives us a visible record of privacy filtering and context limits.</p>
+
+        <h2>Handing context to the model</h2>
+
+        <p>The provider receives the current question, the context bundle, a small amount of conversation state when
+          needed, and clear answer rules.</p>
+
+        <p>The model can summarize findings, compare evidence, explain gaps, and draft follow-up actions. Citations stay
+          connected to the original documents, events, and excerpts. Incomplete evidence produces an explicit gap in
+          the answer.</p>
+
+        <h2>What we gained</h2>
+
+        <ul>
+          <li>Repeatable retrieval for the same data and policy</li>
+          <li>Clear control over what leaves the device</li>
+          <li>Explainable ranking decisions</li>
+          <li>Bounded relationship expansion</li>
+          <li>Smaller provider prompts</li>
+          <li>Better citations and easier debugging</li>
+        </ul>
+
+        <p>The deterministic layer owns search, relationships, ranking, access control, and context construction. The
+          model handles reasoning and writing over supplied evidence.</p>
+
+        <p>This is the first post in a series. Next we will go deeper into request normalization, source adapters, graph
+          expansion, ranking, context budgets, citations, and privacy boundaries.</p>
+      </div>
+
+      <footer class="article-footer">
+        <a href="/blog/">← Back to the blog</a>
+      </footer>
+    </article>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-content">
+      <div class="footer-left">
+        <p class="footer-copyright">© 2026 Kobitab</p>
+        <p class="footer-tagline">Private search for curious people.</p>
+      </div>
+      <div class="footer-links">
+        <a href="/blog/" class="footer-link">Blog</a>
+        <a href="https://github.com/__GITHUB_REPOSITORY__" class="footer-link">GitHub</a>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="/site.js"></script>
+</body>
+
+</html>
