@@ -532,7 +532,7 @@ button:focus-visible {
 /* Bento Grid */
 .bento-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: var(--s-8);
   margin-bottom: var(--s-12);
 }
@@ -570,6 +570,17 @@ button:focus-visible {
   font-size: 1rem;
   line-height: 1.55;
   color: var(--text-secondary);
+}
+
+@media (min-width: 801px) and (max-width: 960px) {
+  .bento-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--s-4);
+  }
+
+  .feature-card {
+    min-height: 0;
+  }
 }
 
 /* Setup Card */
