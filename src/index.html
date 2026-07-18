@@ -69,13 +69,6 @@
         <!-- <span id="release-signing-badge" class="release-signing-badge release-signing-badge-unknown">
           Signing status: checking
         </span> -->
-        <a id="github-link-nav" class="github-link" href="https://github.com/__GITHUB_REPOSITORY__" target="_blank"
-          rel="noopener noreferrer" data-analytics-location="nav" aria-label="GitHub">
-          <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path
-              d="M12 .5C5.65.5.5 5.66.5 12.03c0 5.1 3.3 9.43 7.88 10.96.58.1.79-.25.79-.56v-1.95c-3.2.7-3.87-1.54-3.87-1.54-.53-1.34-1.29-1.7-1.29-1.7-1.06-.73.08-.72.08-.72 1.17.08 1.78 1.2 1.78 1.2 1.04 1.79 2.74 1.27 3.4.97.1-.76.41-1.27.74-1.56-2.56-.29-5.26-1.28-5.26-5.72 0-1.26.45-2.29 1.2-3.1-.12-.3-.52-1.5.11-3.12 0 0 .98-.31 3.2 1.19a11.15 11.15 0 0 1 5.83 0c2.22-1.5 3.2-1.2 3.2-1.2.63 1.62.23 2.82.11 3.12.75.81 1.2 1.84 1.2 3.1 0 4.45-2.7 5.42-5.28 5.7.42.37.79 1.08.79 2.18v3.23c0 .31.21.67.8.56 4.56-1.54 7.86-5.86 7.86-10.96C23.5 5.66 18.35.5 12 .5Z" />
-          </svg>
-        </a>
       </div>
     </div>
   </nav>
@@ -109,6 +102,113 @@
       </div>
 
 
+    </section>
+
+    <section class="knowledge-flow" aria-labelledby="knowledge-flow-heading">
+      <h2 id="knowledge-flow-heading" class="sr-only">How Kobi agents turn context into reviewable actions</h2>
+
+      <div class="flow-stage">
+        <svg class="flow-lines" viewBox="0 0 1100 440" preserveAspectRatio="none" aria-hidden="true">
+          <defs>
+            <path id="flow-in-top" d="M310 96 C405 96 422 190 470 220" />
+            <path id="flow-in-middle" d="M310 220 H470" />
+            <path id="flow-in-bottom" d="M310 344 C405 344 422 250 470 220" />
+            <path id="flow-out-top" d="M630 220 C678 190 695 96 790 96" />
+            <path id="flow-out-middle" d="M630 220 H790" />
+            <path id="flow-out-bottom" d="M630 220 C678 250 695 344 790 344" />
+          </defs>
+
+          <g class="flow-line-base">
+            <use href="#flow-in-top" />
+            <use href="#flow-in-middle" />
+            <use href="#flow-in-bottom" />
+            <use href="#flow-out-top" />
+            <use href="#flow-out-middle" />
+            <use href="#flow-out-bottom" />
+          </g>
+
+          <g class="flow-line-pulses">
+            <use href="#flow-in-top" class="flow-pulse" style="--flow-delay: -0.4s" />
+            <use href="#flow-in-middle" class="flow-pulse" style="--flow-delay: -1.8s" />
+            <use href="#flow-in-bottom" class="flow-pulse" style="--flow-delay: -3.2s" />
+            <use href="#flow-out-top" class="flow-pulse" style="--flow-delay: -2.2s" />
+            <use href="#flow-out-middle" class="flow-pulse" style="--flow-delay: -3.6s" />
+            <use href="#flow-out-bottom" class="flow-pulse" style="--flow-delay: -5s" />
+          </g>
+        </svg>
+
+        <div class="flow-column flow-column-in">
+          <p class="flow-label">Tasks + context in</p>
+
+          <article class="flow-card">
+            <div class="flow-card-meta">
+              <span><i class="flow-dot flow-dot-link"></i>Gmail · Family</span>
+              <span>Selected</span>
+            </div>
+            <h3>School trip form due Friday at 4pm</h3>
+            <p>Selected messages, bounded scope</p>
+          </article>
+
+          <article class="flow-card">
+            <div class="flow-card-meta">
+              <span><i class="flow-dot flow-dot-note"></i>Shopping list · Household</span>
+              <span>Pasted</span>
+            </div>
+            <h3>Milk, nappies, pasta, and apples</h3>
+            <p>A list you typed or pasted</p>
+          </article>
+
+          <article class="flow-card">
+            <div class="flow-card-meta">
+              <span><i class="flow-dot flow-dot-file"></i>Workspace · Evidence</span>
+              <span>Profile-scoped</span>
+            </div>
+            <h3>Launch notes, decisions, and open threads</h3>
+            <p>Recent evidence from this workspace</p>
+          </article>
+        </div>
+
+        <div class="flow-core-wrap" role="group" aria-label="Kobi agents create reviewable drafts and confirmed actions">
+          <div class="flow-core">
+            <span class="flow-core-orbit" aria-hidden="true"></span>
+            <img src="./squirrel-mascot-web.png" alt="" aria-hidden="true" />
+          </div>
+          <strong class="flow-core-label">Kobi</strong>
+        </div>
+
+        <div class="flow-column flow-column-out">
+          <p class="flow-label">Actions out</p>
+
+          <article class="flow-card">
+            <div class="flow-card-meta">
+              <span>Calendar event</span>
+              <span class="flow-result">Confirmed</span>
+            </div>
+            <h3>School trip deadline added</h3>
+            <p>Created only after your approval</p>
+          </article>
+
+          <article class="flow-card">
+            <div class="flow-card-meta">
+              <span>Grocery baskets</span>
+              <span class="flow-result flow-result-draft">Draft</span>
+            </div>
+            <h3>Ocado and Tesco baskets prepared</h3>
+            <p>You review the cart and check out</p>
+          </article>
+
+          <article class="flow-card">
+            <div class="flow-card-meta">
+              <span>Daily work brief</span>
+              <span class="flow-result flow-result-draft">Draft</span>
+            </div>
+            <h3>A start-of-day brief from recent work</h3>
+            <p>Edit before anything is saved or shared</p>
+          </article>
+        </div>
+      </div>
+
+      <p class="flow-loop-label" aria-hidden="true">Find · Draft · Review · Act</p>
     </section>
 
     <div class="bento-grid">
@@ -274,8 +374,6 @@
       </div>
       <div class="footer-links">
         <a href="/blog/" class="footer-link">Blog</a>
-        <a id="github-link-footer" href="https://github.com/__GITHUB_REPOSITORY__" class="footer-link"
-          data-analytics-location="footer">GitHub</a>
         <a id="checksums-link" href="#" class="footer-link">Checksums</a>
       </div>
     </div>

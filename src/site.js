@@ -1,12 +1,6 @@
 import { buildWaitlistPayload, isValidWaitlistEmail, normalizeWaitlistEmail } from './waitlist.js'
 
-const repo = (() => {
-  const link = document.querySelector('a[href*="github.com/"]')
-  if (!link) return 'LostWarrior/Kobitab'
-  const match = link.getAttribute('href')?.match(/github\.com\/([^/]+\/[^/]+)/)
-  return match?.[1] || 'LostWarrior/Kobitab'
-})()
-
+const repo = 'LostWarrior/Kobitab'
 const latestReleaseUrl = `https://api.github.com/repos/${repo}/releases/latest`
 const latestManifestUrl = '/download/latest/manifest.json'
 const signingBadge = document.getElementById('release-signing-badge')
@@ -36,23 +30,6 @@ function getNodeLabel(node) {
 
 function getAnalyticsLocation(node) {
   return node.getAttribute('data-analytics-location') || ''
-}
-
-function isGitHubRepoLink(link) {
-  const href = link.getAttribute('href') || ''
-
-  try {
-    const url = new URL(href, window.location.origin)
-    if (url.hostname !== 'github.com') return false
-
-    const parts = url.pathname.split('/').filter(Boolean)
-    if (parts.length < 2) return false
-
-    const repoPath = `${parts[0]}/${parts[1]}`
-    return repoPath.toLowerCase() === repo.toLowerCase() && !url.pathname.includes('/releases/download/')
-  } catch {
-    return false
-  }
 }
 
 function isPrimaryNavigationClick(event, link) {
@@ -131,28 +108,6 @@ function setupAnalyticsTracking() {
 
       return
     }
-
-    if (!isGitHubRepoLink(link)) return
-
-    const githubProps = {
-      id: link.id || '',
-      label: getNodeLabel(link),
-      location: getAnalyticsLocation(link),
-      href: link.href
-    }
-
-    if (!event.cancelable || !isPrimaryNavigationClick(event, link)) {
-      void trackEvent('GitHub Click', githubProps)
-      return
-    }
-
-    event.preventDefault()
-    void Promise.race([
-      trackEvent('GitHub Click', githubProps),
-      wait(analyticsTimeoutMs)
-    ]).finally(() => {
-      window.location.assign(link.href)
-    })
   })
 }
 
