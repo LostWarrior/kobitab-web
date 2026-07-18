@@ -673,6 +673,7 @@ button:focus-visible {
   width: 68px;
   height: 68px;
   object-fit: contain;
+  transform: translateY(7px);
   filter: drop-shadow(0 10px 16px rgba(23, 17, 10, 0.16));
 }
 
