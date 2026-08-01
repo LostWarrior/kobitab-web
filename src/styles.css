@@ -1590,7 +1590,7 @@ kbd {
   width: min(650px, 100%);
   min-height: 360px;
   grid-template-columns: minmax(0, 1fr) 132px minmax(0, 1fr);
-  align-items: center;
+  align-items: stretch;
   gap: clamp(2.2rem, 4vw, 4rem);
   justify-self: end;
   isolation: isolate;
@@ -1637,11 +1637,14 @@ kbd {
   position: relative;
   z-index: 2;
   display: grid;
+  grid-template-rows: repeat(3, minmax(0, 1fr));
   gap: 0.72rem;
 }
 
 .privacy-flow-card {
+  display: grid;
   min-width: 0;
+  align-content: center;
   padding: 0.78rem 0.86rem;
   border: 1px solid rgba(255, 255, 255, 0.13);
   border-radius: 14px;
@@ -1714,6 +1717,7 @@ kbd {
   position: relative;
   z-index: 3;
   display: grid;
+  align-self: center;
   justify-items: center;
   gap: 0.65rem;
   animation: flow-core-breathe 4.8s ease-in-out infinite;

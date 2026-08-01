@@ -26,8 +26,21 @@ test('every public page keeps the shared shell and one primary heading', () => {
     assert.match(html, /src="\/theme-init\.js"/, pagePath)
     assert.match(html, /src="\/site\.js"/, pagePath)
     assert.match(html, /<link rel="canonical"/, pagePath)
+    assert.match(html, /<!-- @include footer -->/, pagePath)
+    assert.doesNotMatch(html, /<footer class="site-footer">/, pagePath)
     assert.doesNotMatch(html, /<script>\s*\(/, pagePath)
   }
+})
+
+test('shared footer partial keeps product and comparison navigation together', () => {
+  const footer = read('src/_includes/footer.html')
+
+  assert.match(footer, /<footer class="site-footer">/)
+  assert.match(footer, /href="\/#agents"/)
+  assert.match(footer, /href="\/compare\/apple-notes\/"/)
+  assert.match(footer, /href="\/compare\/dropbox\/"/)
+  assert.match(footer, /href="\/compare\/obsidian\/"/)
+  assert.match(footer, /id="checksums-link"/)
 })
 
 test('homepage keeps the animated squirrels and real iPhone coming-soon preview', () => {
