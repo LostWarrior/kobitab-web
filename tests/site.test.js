@@ -36,7 +36,7 @@ test('homepage keeps the animated squirrels and real iPhone coming-soon preview'
   assert.match(html, /id="hero-mascot"/)
   assert.match(html, /src="\/kobi-ios-companion\.png"/)
   assert.match(html, /Coming soon to iPhone/)
-  assert.match(html, /Real development build shown/)
+  assert.match(html, /privacy-flow-stage/)
   assert.match(html, /brew tap LostWarrior\/kobitab &amp;&amp; brew install kobitab/)
   assert.match(css, /@keyframes mascot-float/)
   assert.match(css, /@keyframes phone-float/)

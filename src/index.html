@@ -339,32 +339,77 @@
               aria-hidden="true">↗</span></a>
         </div>
 
-        <div class="privacy-orbit" aria-hidden="true">
-          <svg class="privacy-flow-lines" viewBox="0 0 420 420" preserveAspectRatio="none" focusable="false">
+        <div class="privacy-flow-stage" aria-hidden="true">
+          <svg class="privacy-flow-lines" viewBox="0 0 760 360" preserveAspectRatio="none" focusable="false">
             <defs>
-              <path id="privacy-flow-bookmarks" d="M210 54 C210 112 224 150 210 195" />
-              <path id="privacy-flow-notes" d="M64 290 C125 278 160 245 196 220" />
-              <path id="privacy-flow-files" d="M356 270 C302 270 258 246 224 220" />
+              <path id="privacy-flow-in-top" d="M218 76 C302 76 292 156 352 180" />
+              <path id="privacy-flow-in-middle" d="M218 180 H352" />
+              <path id="privacy-flow-in-bottom" d="M218 284 C302 284 292 204 352 180" />
+              <path id="privacy-flow-out-top" d="M408 180 C468 156 458 76 542 76" />
+              <path id="privacy-flow-out-middle" d="M408 180 H542" />
+              <path id="privacy-flow-out-bottom" d="M408 180 C468 204 458 284 542 284" />
             </defs>
             <g class="privacy-flow-base">
-              <use href="#privacy-flow-bookmarks" />
-              <use href="#privacy-flow-notes" />
-              <use href="#privacy-flow-files" />
+              <use href="#privacy-flow-in-top" />
+              <use href="#privacy-flow-in-middle" />
+              <use href="#privacy-flow-in-bottom" />
+              <use href="#privacy-flow-out-top" />
+              <use href="#privacy-flow-out-middle" />
+              <use href="#privacy-flow-out-bottom" />
             </g>
             <g class="privacy-flow-pulses">
-              <use href="#privacy-flow-bookmarks" style="--privacy-flow-delay: -0.4s" />
-              <use href="#privacy-flow-notes" style="--privacy-flow-delay: -1.8s" />
-              <use href="#privacy-flow-files" style="--privacy-flow-delay: -3.2s" />
+              <use href="#privacy-flow-in-top" style="--privacy-flow-delay: -0.4s" />
+              <use href="#privacy-flow-in-middle" style="--privacy-flow-delay: -1.8s" />
+              <use href="#privacy-flow-in-bottom" style="--privacy-flow-delay: -3.2s" />
+              <use href="#privacy-flow-out-top" style="--privacy-flow-delay: -2.2s" />
+              <use href="#privacy-flow-out-middle" style="--privacy-flow-delay: -3.6s" />
+              <use href="#privacy-flow-out-bottom" style="--privacy-flow-delay: -5s" />
             </g>
           </svg>
-          <span class="orbit orbit-one"></span>
-          <span class="orbit orbit-two"></span>
-          <span class="privacy-chip chip-bookmarks">Bookmarks</span>
-          <span class="privacy-chip chip-notes">Notes</span>
-          <span class="privacy-chip chip-files">Files</span>
-          <div class="privacy-core">
-            <img src="/squirrel-mascot-display.png" alt="" width="547" height="680" loading="lazy"
-              decoding="async" />
+
+          <div class="privacy-flow-column privacy-flow-column-in">
+            <article class="privacy-flow-card">
+              <span><i class="privacy-dot privacy-dot-bookmark"></i>Bookmarks</span>
+              <strong>Saved pages</strong>
+              <small>Local browser export</small>
+            </article>
+            <article class="privacy-flow-card">
+              <span><i class="privacy-dot privacy-dot-note"></i>Notes</span>
+              <strong>Obsidian ideas</strong>
+              <small>Indexed on your Mac</small>
+            </article>
+            <article class="privacy-flow-card">
+              <span><i class="privacy-dot privacy-dot-file"></i>Files</span>
+              <strong>Downloads folder</strong>
+              <small>No account required</small>
+            </article>
+          </div>
+
+          <div class="privacy-core-wrap">
+            <div class="privacy-core">
+              <span class="privacy-core-orbit"></span>
+              <img src="/squirrel-mascot-display.png" alt="" width="547" height="680" loading="lazy"
+                decoding="async" />
+            </div>
+            <strong>Kobi</strong>
+          </div>
+
+          <div class="privacy-flow-column privacy-flow-column-out">
+            <article class="privacy-flow-card">
+              <span>Local index</span>
+              <strong>Search stays close</strong>
+              <small>Core library on-device</small>
+            </article>
+            <article class="privacy-flow-card">
+              <span>Optional AI</span>
+              <strong>Your provider</strong>
+              <small>Only when you choose</small>
+            </article>
+            <article class="privacy-flow-card">
+              <span>Visible sources</span>
+              <strong>Cited answers</strong>
+              <small>Trace each result back</small>
+            </article>
           </div>
         </div>
 
@@ -419,7 +464,7 @@
           <span class="acorn ios-acorn" aria-hidden="true"></span>
           <div class="ios-device">
             <img src="/kobi-ios-companion.png"
-              alt="Lumina Companion development build on iPhone, showing note capture, bookmark capture, and applied activity status"
+              alt="Kobi Companion preview on iPhone, showing note capture, bookmark capture, and applied activity status"
               width="1206" height="2622" loading="lazy" decoding="async" />
           </div>
         </div>
@@ -435,7 +480,6 @@
             <span><i>02</i>Save bookmarks</span>
             <span><i>03</i>See delivery status</span>
           </div>
-          <p class="ios-preview-note">Real development build shown · Currently titled Lumina Companion · Interface may change before release</p>
         </div>
       </div>
     </section>
