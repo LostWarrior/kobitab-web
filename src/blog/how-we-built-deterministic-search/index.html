@@ -23,42 +23,48 @@
     content="How Kobitab searches, ranks, filters, and cites context before the model writes an answer." />
 
   <meta http-equiv="Content-Security-Policy"
-    content="default-src 'none'; base-uri 'none'; object-src 'none'; frame-ancestors 'none'; form-action 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdn.jsdelivr.net; font-src https://fonts.gstatic.com https://cdn.jsdelivr.net; connect-src https://api.github.com https://cloudflareinsights.com 'self'; img-src 'self' data:;" />
+    content="default-src 'none'; base-uri 'none'; object-src 'none'; form-action 'self'; script-src 'self' https://static.cloudflareinsights.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; connect-src https://api.github.com https://cloudflareinsights.com 'self'; img-src 'self' data:;" />
   <meta name="referrer" content="strict-origin-when-cross-origin" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
-  <link rel="icon" type="image/png" href="/icon.png" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+  <link rel="icon" type="image/png" href="/favicon.png" />
   <link rel="stylesheet" href="/styles.css" />
+  <script src="/theme-init.js"></script>
 </head>
 
 <body>
-  <div class="background-blobs" aria-hidden="true">
-    <div class="blob blob-1"></div>
-    <div class="blob blob-2"></div>
-  </div>
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-  <nav class="nav" aria-label="Primary navigation">
-    <div class="nav-content container">
-      <a href="/" class="brand">
-        <img src="/squirrel-mascot-web.png" alt="" aria-hidden="true" class="brand-mark" />
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="nav-shell">
+      <a href="/" class="brand" aria-label="Kobitab home">
+        <img src="/squirrel-mascot-display.png" alt="" aria-hidden="true" class="brand-mark" width="34"
+          height="34" />
         <span>Kobitab</span>
       </a>
       <div class="nav-links">
-        <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
-          <svg class="sun-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <circle cx="12" cy="12" r="4" />
-            <path d="M12 2v2M12 20v2M4.93 4.93l1.42 1.42M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.42-1.42M17.66 6.34l1.41-1.41"
-              fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="2" />
+        <a href="/#how-it-works">How it works</a>
+        <a href="/compare/">Compare</a>
+        <a href="/blog/" aria-current="page">Blog</a>
+      </div>
+      <div class="nav-actions">
+        <button id="theme-toggle" class="theme-toggle" type="button" aria-label="Use dark theme" aria-pressed="false">
+          <svg class="sun-icon" viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="12" cy="12" r="3.5" />
+            <path d="M12 2.5v2M12 19.5v2M4.5 12h-2M21.5 12h-2M5.28 5.28l1.42 1.42M17.3 17.3l1.42 1.42M18.72 5.28 17.3 6.7M6.7 17.3l-1.42 1.42"
+              fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="1.8" />
           </svg>
         </button>
-        <a href="/blog/">Blog</a>
+        <a class="nav-download" href="/#download">Get Kobi</a>
       </div>
     </div>
   </nav>
 
-  <main class="blog-main container">
+  <main id="main-content" class="blog-main section-shell">
     <article>
       <header class="article-header">
         <p class="blog-eyebrow">Building Kobitab</p>
@@ -268,14 +274,30 @@
     </article>
   </main>
 
-  <footer class="footer">
-    <div class="container footer-content">
-      <div class="footer-left">
-        <p class="footer-copyright">© 2026 Kobitab</p>
-        <p class="footer-tagline">Private search for curious people.</p>
+  <footer class="site-footer">
+    <div class="footer-shell">
+      <div class="footer-brand">
+        <a href="/" class="brand">
+          <img src="/squirrel-mascot-display.png" alt="" aria-hidden="true" class="brand-mark" width="34"
+            height="34" loading="lazy" decoding="async" />
+          <span>Kobitab</span>
+        </a>
+        <p>Private search for curious people.</p>
       </div>
-      <div class="footer-links">
-        <a href="/blog/" class="footer-link">Blog</a>
+      <div class="footer-column">
+        <strong>Product</strong>
+        <a href="/#how-it-works">How it works</a>
+        <a href="/#download">Download</a>
+        <a href="/blog/">Blog</a>
+      </div>
+      <div class="footer-column">
+        <strong>Compare</strong>
+        <a href="/compare/">All comparisons</a>
+        <a href="/compare/raindrop/">Kobi vs Raindrop.io</a>
+        <a href="/compare/raycast/">Kobi vs Raycast</a>
+      </div>
+      <div class="footer-meta">
+        <p>© 2026 Kobitab</p>
       </div>
     </div>
   </footer>
