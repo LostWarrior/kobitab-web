@@ -36,7 +36,8 @@
   --radius-sm: 10px;
   --radius-md: 18px;
   --radius-lg: 28px;
-  --section: min(1180px, calc(100vw - 48px));
+  --section-max: 1280px;
+  --section: min(var(--section-max), calc(100vw - 48px));
   --reading: 760px;
 }
 
@@ -1480,7 +1481,9 @@ kbd {
 }
 
 .privacy-section {
-  padding: 0 max(24px, calc((100vw - 1280px) / 2));
+  width: var(--section);
+  margin: 0 auto;
+  padding: 0;
 }
 
 .privacy-shell {
@@ -3327,7 +3330,7 @@ h6,
 
 @media (max-width: 760px) {
   :root {
-    --section: min(100% - 32px, 1180px);
+    --section: min(100% - 32px, var(--section-max));
   }
 
   .site-nav {
