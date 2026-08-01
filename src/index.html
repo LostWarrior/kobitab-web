@@ -104,6 +104,9 @@
         <span class="acorn acorn-one" aria-hidden="true"></span>
         <span class="acorn acorn-two" aria-hidden="true"></span>
         <span class="acorn acorn-three" aria-hidden="true"></span>
+        <span class="acorn acorn-four" aria-hidden="true"></span>
+        <span class="acorn acorn-five" aria-hidden="true"></span>
+        <span class="acorn acorn-six" aria-hidden="true"></span>
         <img id="hero-mascot" class="hero-mascot" src="/squirrel-mascot-display.png" alt=""
           aria-hidden="true" width="547" height="680" decoding="async" fetchpriority="high" />
 
@@ -233,91 +236,13 @@
             </p>
             <div class="agent-principle">
               <span class="agent-principle-mark" aria-hidden="true">✓</span>
-              <span><strong>Approve once for recurring work.</strong> Kobi keeps the job bounded; you can review, pause,
+              <span><strong>Approve once for recurring work.</strong> You can review, pause,
                 or change the automation anytime.</span>
             </div>
           </div>
         </div>
 
-        <div class="agent-stage">
-          <div class="agent-run" aria-label="Example Family Calendar Assistant run">
-            <div class="agent-run-bar">
-              <span class="agent-run-title"><i class="agent-live-dot"></i>Agent run</span>
-              <span class="agent-run-state">First-run review</span>
-            </div>
-
-            <div class="agent-prompt">
-              <span class="agent-avatar">K</span>
-              <div>
-                <small>You asked</small>
-                <p>“Check school emails each week for Calendar events.”</p>
-              </div>
-            </div>
-
-            <ol class="agent-timeline">
-              <li class="agent-step is-complete">
-                <span class="agent-step-icon" aria-hidden="true">01</span>
-                <span><strong>Find context</strong><small>Bounded Gmail scan · 14 messages checked</small></span>
-                <span class="agent-check" aria-hidden="true">✓</span>
-              </li>
-              <li class="agent-step is-complete">
-                <span class="agent-step-icon" aria-hidden="true">02</span>
-                <span><strong>Draft the first run</strong><small>2 Calendar event candidates prepared</small></span>
-                <span class="agent-check" aria-hidden="true">✓</span>
-              </li>
-              <li class="agent-step is-live">
-                <span class="agent-step-icon" aria-hidden="true">03</span>
-                <span><strong>Approve automation</strong><small>Future matching events can be added automatically</small></span>
-                <span class="agent-wait" aria-hidden="true"></span>
-              </li>
-            </ol>
-
-            <div class="agent-review-card">
-              <div>
-                <span class="agent-review-label">First run ready</span>
-                <strong>Approve recurring Calendar updates?</strong>
-                <small>Sports day · Term end · future school emails</small>
-              </div>
-              <span class="agent-review-action">Approve once <i aria-hidden="true">→</i></span>
-            </div>
-
-            <img class="agent-squirrel" src="/squirrel-mascot-display.png" alt="" aria-hidden="true" width="547"
-              height="680" loading="lazy" decoding="async" />
-          </div>
-
-          <div class="agent-catalog" aria-label="Built-in Kobi agents">
-            <article class="agent-card">
-              <div class="agent-card-top">
-                <span class="agent-card-number">01</span>
-                <span class="agent-status">Draft-only</span>
-              </div>
-              <span class="agent-card-icon" aria-hidden="true">↗</span>
-              <h3>Daily Work Brief</h3>
-              <p>Turns recent saved items and workspace context into a brief you can edit before saving.</p>
-            </article>
-
-            <article class="agent-card">
-              <div class="agent-card-top">
-                <span class="agent-card-number">02</span>
-                <span class="agent-status">Review once</span>
-              </div>
-              <span class="agent-card-icon" aria-hidden="true">◇</span>
-              <h3>Family Calendar Assistant</h3>
-              <p>Finds family plans and school deadlines in a bounded Gmail scan. After you approve the first run,
-                matching Calendar events can be created automatically.</p>
-            </article>
-
-            <article class="agent-card">
-              <div class="agent-card-top">
-                <span class="agent-card-number">03</span>
-                <span class="agent-status">Draft-only</span>
-              </div>
-              <span class="agent-card-icon" aria-hidden="true">⌁</span>
-              <h3>Grocery Delivery Planner</h3>
-              <p>Turns a shopping list into Ocado and Tesco basket drafts. You review, sign in, and check out.</p>
-            </article>
-          </div>
-        </div>
+        <div class="agent-stage" data-agent-showcase data-initial-agent="family-calendar"></div>
 
         <div class="agent-credo" aria-label="Kobi agent workflow">
           <span>Find · Draft · Approve · Automate</span>
@@ -490,22 +415,22 @@
         <p>Honest, source-checked comparisons—including the reasons another product may suit you better.</p>
       </div>
       <div class="compare-card-grid">
-        <a class="compare-card compare-card-green" href="/compare/raindrop/">
+        <a class="compare-card compare-card-green" href="/compare/apple-notes/">
           <span class="compare-kicker">Kobi vs</span>
-          <h3>Raindrop.io</h3>
-          <p>Local private library or polished cloud bookmark collection?</p>
+          <h3>Apple Notes</h3>
+          <p>Private recall layer or everyday Apple-native notes?</p>
           <span class="compare-arrow" aria-hidden="true">↗</span>
         </a>
-        <a class="compare-card compare-card-ochre" href="/compare/raycast/">
+        <a class="compare-card compare-card-ochre" href="/compare/dropbox/">
           <span class="compare-kicker">Kobi vs</span>
-          <h3>Raycast</h3>
-          <p>Deep personal recall or a broad productivity launcher?</p>
+          <h3>Dropbox</h3>
+          <p>Personal memory search or cloud file sync?</p>
           <span class="compare-arrow" aria-hidden="true">↗</span>
         </a>
-        <a class="compare-card compare-card-paper" href="/compare/">
-          <span class="compare-kicker">Browse</span>
-          <h3>All comparisons</h3>
-          <p>See the quick guide and choose with fewer assumptions.</p>
+        <a class="compare-card compare-card-paper" href="/compare/obsidian/">
+          <span class="compare-kicker">Kobi vs</span>
+          <h3>Obsidian</h3>
+          <p>Retrieval and agents or a Markdown knowledge base?</p>
           <span class="compare-arrow" aria-hidden="true">↗</span>
         </a>
       </div>
@@ -581,8 +506,9 @@
       <div class="footer-column">
         <strong>Compare</strong>
         <a href="/compare/">All comparisons</a>
-        <a href="/compare/raindrop/">Kobi vs Raindrop.io</a>
-        <a href="/compare/raycast/">Kobi vs Raycast</a>
+        <a href="/compare/apple-notes/">Kobi vs Apple Notes</a>
+        <a href="/compare/dropbox/">Kobi vs Dropbox</a>
+        <a href="/compare/obsidian/">Kobi vs Obsidian</a>
       </div>
       <div class="footer-meta">
         <p>© 2026 Kobitab</p>

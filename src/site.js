@@ -1,3 +1,4 @@
+import { initAgentShowcase } from './agent-showcase.js'
 import { buildWaitlistPayload, isValidWaitlistEmail, normalizeWaitlistEmail } from './waitlist.js'
 
 const repo = 'LostWarrior/Kobitab'
@@ -715,6 +716,7 @@ function scheduleNonCriticalWork() {
 }
 
 scheduleNonCriticalWork()
+initAgentShowcase()
 setupWaitlistForms()
 setupThemeToggle()
 setupCopyCommands()

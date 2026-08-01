@@ -7,8 +7,9 @@ const projectRoot = new URL('..', import.meta.url).pathname
 const pagePaths = [
   'src/index.html',
   'src/compare/index.html',
-  'src/compare/raindrop/index.html',
-  'src/compare/raycast/index.html',
+  'src/compare/apple-notes/index.html',
+  'src/compare/dropbox/index.html',
+  'src/compare/obsidian/index.html',
   'src/blog/index.html',
   'src/blog/how-we-built-deterministic-search/index.html'
 ]
@@ -46,26 +47,33 @@ test('homepage keeps the animated squirrels and real iPhone coming-soon preview'
 
 test('homepage presents Kobi agents as a first-class, reviewable product capability', () => {
   const html = read('src/index.html')
+  const component = read('src/agent-showcase.js')
 
   assert.match(html, /id="agents"/)
-  assert.match(html, /Daily Work Brief/)
-  assert.match(html, /Family Calendar Assistant/)
-  assert.match(html, /Grocery Delivery Planner/)
+  assert.match(html, /data-agent-showcase/)
+  assert.match(component, /Daily Work Brief/)
+  assert.match(component, /Family Calendar Assistant/)
+  assert.match(component, /Grocery Delivery Planner/)
   assert.match(html, /Approve once for recurring work/)
   assert.match(html, /Find · Draft · Approve · Automate/)
 })
 
 test('comparison pages include honest verdicts and official source links', () => {
-  const raindrop = read('src/compare/raindrop/index.html')
-  const raycast = read('src/compare/raycast/index.html')
+  const appleNotes = read('src/compare/apple-notes/index.html')
+  const dropbox = read('src/compare/dropbox/index.html')
+  const obsidian = read('src/compare/obsidian/index.html')
 
-  assert.match(raindrop, /Choose Raindrop\.io if/)
-  assert.match(raindrop, /https:\/\/help\.raindrop\.io\/security/)
-  assert.match(raindrop, /https:\/\/help\.raindrop\.io\/collaboration/)
+  assert.match(appleNotes, /Choose Apple Notes if/)
+  assert.match(appleNotes, /https:\/\/support\.apple\.com\/en-lamr\/guide\/security\/sec1782bcab1\/web/)
+  assert.match(appleNotes, /https:\/\/support\.apple\.com\/guide\/notes\/share-your-notes-and-folders-apda5307056b\/mac/)
 
-  assert.match(raycast, /Choose Raycast if/)
-  assert.match(raycast, /https:\/\/www\.raycast\.com\/privacy/)
-  assert.match(raycast, /https:\/\/www\.raycast\.com\/pricing/)
+  assert.match(dropbox, /Choose Dropbox if/)
+  assert.match(dropbox, /https:\/\/help\.dropbox\.com\/sync\/sync-overview/)
+  assert.match(dropbox, /https:\/\/help\.dropbox\.com\/security\/safe-to-use/)
+
+  assert.match(obsidian, /Choose Obsidian if/)
+  assert.match(obsidian, /https:\/\/obsidian\.md\/help\/create-note/)
+  assert.match(obsidian, /https:\/\/obsidian\.md\/help\/Obsidian%20Sync\/Security%20and%20privacy/)
 })
 
 test('sitemap exposes the homepage, blog, and comparison routes', () => {
@@ -74,8 +82,9 @@ test('sitemap exposes the homepage, blog, and comparison routes', () => {
     'https://kobitab.com/',
     'https://kobitab.com/blog/',
     'https://kobitab.com/compare/',
-    'https://kobitab.com/compare/raindrop/',
-    'https://kobitab.com/compare/raycast/'
+    'https://kobitab.com/compare/apple-notes/',
+    'https://kobitab.com/compare/dropbox/',
+    'https://kobitab.com/compare/obsidian/'
   ]) {
     assert.match(sitemap, new RegExp(`<loc>${route.replaceAll('.', '\\.')}</loc>`))
   }
