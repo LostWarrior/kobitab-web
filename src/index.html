@@ -28,7 +28,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,700&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Barlow+Semi+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
   <link rel="preload" as="image" href="/squirrel-mascot-display.png" fetchpriority="high" />
   <link rel="icon" type="image/png" href="/favicon.png" />
@@ -36,7 +36,7 @@
   <script src="/theme-init.js"></script>
 </head>
 
-<body>
+<body class="background-page">
   <a class="skip-link" href="#main-content">Skip to content</a>
 
   <nav class="site-nav" aria-label="Primary navigation">
@@ -81,8 +81,8 @@
           </span>
         </h1>
         <p class="hero-dek">
-          Kobi finds the right context across your bookmarks, notes, and files—then focused agents turn it into briefs,
-          plans, and reviewed actions.
+          Kobi finds right information across your bookmarks, notes, files, emails and messages and then turns it into
+          actions
         </p>
         <div class="hero-actions">
           <a id="download-dmg-link"
@@ -223,7 +223,7 @@
     </section>
 
     <section id="agents" class="agents-section section-shell" aria-labelledby="agents-heading">
-      <div class="agents-panel">
+      <div class="agents-panel background-agents">
         <div class="agents-intro">
           <div>
             <p class="eyebrow">Kobi Agents · Built to do</p>
@@ -231,8 +231,8 @@
           </div>
           <div class="agents-intro-copy">
             <p>
-              Kobi’s agents are focused workflows with a clear job. They gather the relevant context, prepare the first
-              run for review, then repeat approved routines automatically.
+              Kobi's agents have a clear job. They gather relevant information, prepare first run for review and enable
+              you to repeat this automatically.
             </p>
             <div class="agent-principle">
               <span class="agent-principle-mark" aria-hidden="true">✓</span>
@@ -252,7 +252,7 @@
     </section>
 
     <section class="privacy-section">
-      <div class="privacy-shell">
+      <div class="privacy-shell background-privacy">
         <div class="privacy-copy">
           <p class="eyebrow eyebrow-light">Privacy, without theatre</p>
           <h2>Your library lives<br><em>on your Mac.</em></h2>
@@ -313,7 +313,7 @@
           <div class="privacy-core-wrap">
             <div class="privacy-core">
               <span class="privacy-core-orbit"></span>
-              <img src="/squirrel-mascot-display.png" alt="" width="547" height="680" loading="lazy"
+              <img src="/squirrel-mascot-meditating.png" alt="" width="512" height="512" loading="lazy"
                 decoding="async" />
             </div>
             <strong>Kobi</strong>
@@ -352,8 +352,8 @@
           <p class="eyebrow">Your setup, your call</p>
           <h2>Useful before<br><em>AI enters the room.</em></h2>
           <p>
-            Start with fast local search. If you want summaries and answers, connect a supported provider—or keep the
-            whole setup local.
+            Start with fast local search. If you want summaries and answers, connect a supported provider or use a local
+            model.
           </p>
         </div>
         <div class="provider-stack" aria-label="Optional AI provider choices">
@@ -382,7 +382,7 @@
     </section>
 
     <section class="ios-section section-shell" aria-labelledby="ios-heading">
-      <div class="ios-panel">
+      <div class="ios-panel background-ios">
         <div class="ios-stage" aria-label="Development preview of Kobi Companion for iPhone">
           <span class="ios-ring ios-ring-one" aria-hidden="true"></span>
           <span class="ios-ring ios-ring-two" aria-hidden="true"></span>
@@ -396,8 +396,8 @@
           <p class="eyebrow"><span class="eyebrow-dot"></span>Coming soon to iPhone</p>
           <h2 id="ios-heading">Catch the thought.<br><em>Send it home.</em></h2>
           <p>
-            Kobi Companion is a focused capture app for notes and bookmarks on the move. Captures queue safely—even
-            when your Mac is offline—and your Mac remains the home of your library.
+            Kobi iphone app let's you carry your brain on the move. Capture instructions, add information, approve
+            actions even when your mac is offline.
           </p>
           <div class="ios-feature-list" aria-label="Planned iPhone companion features">
             <span><i>01</i>Capture notes</span>
@@ -412,22 +412,21 @@
       <div class="section-intro section-intro-wide">
         <p class="eyebrow">Compare thoughtfully</p>
         <h2>The right tool depends<br><em>on the job.</em></h2>
-        <p>Honest, source-checked comparisons—including the reasons another product may suit you better.</p>
       </div>
       <div class="compare-card-grid">
-        <a class="compare-card compare-card-green" href="/compare/apple-notes/">
+        <a class="compare-card compare-card-green background-brand" href="/compare/apple-notes/">
           <span class="compare-kicker">Kobi vs</span>
           <h3>Apple Notes</h3>
           <p>Private recall layer or everyday Apple-native notes?</p>
           <span class="compare-arrow" aria-hidden="true">↗</span>
         </a>
-        <a class="compare-card compare-card-ochre" href="/compare/dropbox/">
+        <a class="compare-card compare-card-ochre background-accent" href="/compare/dropbox/">
           <span class="compare-kicker">Kobi vs</span>
           <h3>Dropbox</h3>
           <p>Personal memory search or cloud file sync?</p>
           <span class="compare-arrow" aria-hidden="true">↗</span>
         </a>
-        <a class="compare-card compare-card-paper" href="/compare/obsidian/">
+        <a class="compare-card compare-card-paper background-surface" href="/compare/obsidian/">
           <span class="compare-kicker">Kobi vs</span>
           <h3>Obsidian</h3>
           <p>Retrieval and agents or a Markdown knowledge base?</p>
@@ -437,10 +436,9 @@
     </section>
 
     <section id="download" class="download-section section-shell">
-      <div class="download-panel">
+      <div class="download-panel background-brand">
         <div class="download-mascot" aria-hidden="true">
-          <span class="acorn"></span>
-          <img src="/squirrel-mascot-display.png" alt="" width="547" height="680" loading="lazy"
+          <img src="/squirrel-mascot-pointing.png" alt="" width="512" height="512" loading="lazy"
             decoding="async" />
         </div>
         <div class="download-copy">

@@ -189,8 +189,8 @@ function getAgentRunHtml(agent) {
         <span class="agent-review-action">${escapeHtml(agent.review.action)} <i aria-hidden="true">→</i></span>
       </div>
 
-      <img class="agent-squirrel" src="/squirrel-mascot-display.png" alt="" aria-hidden="true" width="547"
-        height="680" loading="lazy" decoding="async" />
+      <img class="agent-squirrel" src="/squirrel-mascot-pointing.png" alt="" aria-hidden="true" width="512"
+        height="512" loading="lazy" decoding="async" />
     </div>
   `
 }
