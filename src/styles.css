@@ -3067,6 +3067,26 @@ kbd {
   text-decoration: none;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.mini-result strong,
+.result-line b,
+.agent-principle strong,
+.agent-step strong,
+.agent-review-card strong,
+.privacy-flow-card strong,
+.privacy-core-wrap > strong,
+.privacy-facts strong,
+.provider-row strong,
+.duel-brand strong,
+.footer-column strong {
+  font-family: var(--font-display);
+}
+
 .is-hidden {
   display: none;
 }
