@@ -147,6 +147,10 @@
   background: var(--paper-deep);
 }
 
+.background-moss-soft {
+  background: var(--moss-soft);
+}
+
 .background-surface {
   background: var(--surface);
 }
@@ -2139,10 +2143,6 @@ kbd {
   color: #f5f7f3;
 }
 
-.compare-card-ochre {
-  color: var(--on-ochre);
-}
-
 .compare-card-paper {
   color: var(--ink);
 }
@@ -2215,7 +2215,10 @@ kbd {
   color: var(--surface-accent, var(--on-ochre-kicker));
 }
 
-.download-copy h2,
+.download-copy h2 {
+  color: var(--ink);
+}
+
 .download-copy h2 em {
   color: var(--surface-accent, var(--ochre-deep));
 }
@@ -2228,11 +2231,11 @@ kbd {
 .download-mascot {
   position: relative;
   z-index: 2;
-  width: min(190px, 18vw);
-  height: 190px;
+  width: min(215px, 20vw);
+  height: 210px;
   align-self: center;
-  justify-self: end;
-  transform: translateX(-1rem);
+  justify-self: start;
+  transform: none;
 }
 
 .download-mascot img {
@@ -2240,7 +2243,7 @@ kbd {
   z-index: 2;
   bottom: 0;
   left: 0;
-  width: min(170px, 15vw);
+  width: min(195px, 17vw);
   height: auto;
   filter: drop-shadow(0 28px 30px rgba(75, 45, 20, 0.2));
   transform: scaleX(-1);
