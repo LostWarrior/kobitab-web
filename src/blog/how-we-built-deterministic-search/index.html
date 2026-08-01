@@ -106,7 +106,7 @@
   -&gt; intent and entity extraction
   -&gt; source search
   -&gt; entity resolution
-  -&gt; bounded graph expansion
+  -&gt; graph expansion
   -&gt; ranking and deduplication
   -&gt; privacy and budget filtering
   -&gt; ContextBundle
@@ -170,7 +170,7 @@
           <code>attached_to</code>, and <code>links_to</code>. Every edge comes from indexed data or a configured alias.
         </p>
 
-        <h2>Keeping expansion bounded</h2>
+        <h2>Keeping expansion controlled</h2>
 
         <p>If Jane attended the meeting, pulling in everything Jane created would add a lot of weak context. We use hard
           limits for hops, sources, access, and result counts.</p>
@@ -258,7 +258,7 @@
           <li>Repeatable retrieval for the same data and policy</li>
           <li>Clear control over what leaves the device</li>
           <li>Explainable ranking decisions</li>
-          <li>Bounded relationship expansion</li>
+          <li>Controlled relationship expansion</li>
           <li>Smaller provider prompts</li>
           <li>Better citations and easier debugging</li>
         </ul>

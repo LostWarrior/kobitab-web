@@ -40,13 +40,13 @@ export const agentShowcases = [
     status: 'Review once',
     icon: 'calendar',
     title: 'Family Calendar Assistant',
-    summary: 'Finds family plans and school deadlines in a bounded Gmail scan. After you approve the first run, matching Calendar events can be created automatically.',
+    summary: 'Finds family plans and school deadlines in a Gmail scan. After you approve the first run, matching Calendar events can be created automatically.',
     runState: 'First-run review',
     prompt: '“Check school emails each week for Calendar events.”',
     steps: [
       {
         title: 'Find context',
-        detail: 'Bounded Gmail scan · 14 messages checked',
+        detail: 'Gmail scan · 14 messages checked',
         state: 'complete'
       },
       {
