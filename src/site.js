@@ -1,3 +1,4 @@
+import { initAgentShowcase } from './agent-showcase.js'
 import { buildWaitlistPayload, isValidWaitlistEmail, normalizeWaitlistEmail } from './waitlist.js'
 
 const repo = 'LostWarrior/Kobitab'
@@ -245,6 +246,16 @@ function setupThemeToggle() {
   const themeToggle = document.getElementById('theme-toggle')
   if (!themeToggle) return
 
+  const syncThemeToggle = () => {
+    const explicitTheme = document.documentElement.getAttribute('data-theme')
+    const isDark = explicitTheme
+      ? explicitTheme === 'dark'
+      : window.matchMedia('(prefers-color-scheme: dark)').matches
+    themeToggle.setAttribute('aria-pressed', String(isDark))
+    themeToggle.setAttribute('aria-label', isDark ? 'Use light theme' : 'Use dark theme')
+  }
+
+  syncThemeToggle()
   themeToggle.addEventListener('click', () => {
     const currentTheme = document.documentElement.getAttribute('data-theme')
     let newTheme
@@ -258,7 +269,54 @@ function setupThemeToggle() {
 
     document.documentElement.setAttribute('data-theme', newTheme)
     localStorage.setItem('theme', newTheme)
+    syncThemeToggle()
   })
+}
+
+function setupCopyCommands() {
+  async function copyText(value) {
+    if (navigator.clipboard?.writeText) {
+      try {
+        await navigator.clipboard.writeText(value)
+        return
+      } catch {
+        // Fall back to a temporary selection when Clipboard API access is unavailable.
+      }
+    }
+
+    const textarea = document.createElement('textarea')
+    textarea.value = value
+    textarea.setAttribute('readonly', '')
+    textarea.style.position = 'fixed'
+    textarea.style.left = '-9999px'
+    document.body.append(textarea)
+    textarea.select()
+    const copied = document.execCommand('copy')
+    textarea.remove()
+    if (!copied) throw new Error('Copy command was unavailable')
+  }
+
+  for (const button of document.querySelectorAll('[data-copy-command]')) {
+    button.addEventListener('click', async () => {
+      const command = button.getAttribute('data-copy-command') || ''
+      const label = button.querySelector('[data-copy-label]')
+      if (!command || !(label instanceof HTMLElement)) return
+
+      try {
+        await copyText(command)
+        label.textContent = 'Copied'
+        void trackEvent('Command Copied', { command })
+        window.setTimeout(() => {
+          label.textContent = 'Copy'
+        }, 1800)
+      } catch {
+        label.textContent = 'Try again'
+        window.setTimeout(() => {
+          label.textContent = 'Copy'
+        }, 1800)
+      }
+    })
+  }
 }
 
 function setWaitlistStatus(statusNode, text, tone = '') {
@@ -629,18 +687,36 @@ function setupWaitlistForms() {
 
 function scheduleNonCriticalWork() {
   const run = () => {
-    hydrateReleaseAssets()
+    if (
+      signingBadge
+      || document.getElementById('download-dmg-link')
+      || document.getElementById('download-latest-link')
+      || document.getElementById('checksums-link')
+    ) {
+      hydrateReleaseAssets()
+    }
     setupAnalyticsTracking()
   }
 
-  if ('requestIdleCallback' in window) {
-    window.requestIdleCallback(run, { timeout: 1500 })
+  const schedule = () => {
+    if ('requestIdleCallback' in window) {
+      window.requestIdleCallback(run, { timeout: 2500 })
+      return
+    }
+
+    window.setTimeout(run, 0)
+  }
+
+  if (document.readyState === 'complete') {
+    schedule()
     return
   }
 
-  window.setTimeout(run, 0)
+  window.addEventListener('load', schedule, { once: true })
 }
 
 scheduleNonCriticalWork()
+initAgentShowcase()
 setupWaitlistForms()
 setupThemeToggle()
+setupCopyCommands()

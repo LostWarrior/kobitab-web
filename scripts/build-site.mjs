@@ -6,12 +6,14 @@ const scriptDir = dirname(fileURLToPath(import.meta.url))
 const projectRoot = resolve(scriptDir, '..')
 const srcDir = join(projectRoot, 'src')
 const distDir = join(projectRoot, 'dist')
+const footerHtml = readFileSync(join(srcDir, '_includes', 'footer.html'), 'utf-8').trim()
 
 rmSync(distDir, { recursive: true, force: true })
 mkdirSync(distDir, { recursive: true })
 
 // Publish all static files from src so media assets are available at runtime.
 cpSync(srcDir, distDir, { recursive: true })
+rmSync(join(distDir, '_includes'), { recursive: true, force: true })
 
 const appReleaseRepo = 'LostWarrior/Kobitab'
 
@@ -31,7 +33,9 @@ function collectFiles(dir) {
 }
 
 for (const filePath of collectFiles(distDir).filter((f) => f.endsWith('.html'))) {
-  const html = readFileSync(filePath, 'utf-8').replaceAll('__GITHUB_REPOSITORY__', appReleaseRepo)
+  const html = readFileSync(filePath, 'utf-8')
+    .replaceAll('__GITHUB_REPOSITORY__', appReleaseRepo)
+    .replaceAll('<!-- @include footer -->', footerHtml)
   writeFileSync(filePath, html)
 }
 
