@@ -579,13 +579,6 @@ h2 em {
   opacity: 0.75;
 }
 
-.hero-note {
-  margin-top: 1rem;
-  color: var(--ink-muted);
-  font-family: var(--font-mono);
-  font-size: 0.68rem;
-}
-
 .hero-scene {
   position: relative;
   min-height: 530px;
@@ -3455,8 +3448,7 @@ h6,
     text-align: center;
   }
 
-  .hero-dek,
-  .hero-note {
+  .hero-dek {
     max-width: 20.5rem;
     margin-inline: auto;
     text-align: center;
