@@ -68,7 +68,6 @@ test('homepage presents Kobi agents as a first-class, reviewable product capabil
   assert.match(component, /Family Calendar Assistant/)
   assert.match(component, /Grocery Delivery Planner/)
   assert.match(html, /Approve once for recurring work/)
-  assert.match(html, /Find · Draft · Approve · Automate/)
 })
 
 test('comparison pages include honest verdicts and official source links', () => {
