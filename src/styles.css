@@ -1586,33 +1586,6 @@ kbd {
   line-height: 1.65;
 }
 
-.agent-credo {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 2rem;
-  margin-top: 2.2rem;
-  padding-top: 1.4rem;
-  border-top: 1px solid rgba(21, 34, 30, 0.2);
-}
-
-.agent-credo span {
-  font-family: var(--font-display);
-  font-size: 1.25rem;
-  font-weight: 700;
-  letter-spacing: -0.02em;
-}
-
-.agent-credo p {
-  color: rgba(21, 34, 30, 0.68);
-  font-family: var(--font-mono);
-  font-size: 0.56rem;
-  letter-spacing: 0.055em;
-  text-transform: uppercase;
-}
-
 .privacy-section {
   width: var(--section);
   margin: 0 auto;
@@ -3622,12 +3595,6 @@ h6,
 
   .agent-card {
     min-height: 210px;
-  }
-
-  .agent-credo {
-    align-items: flex-start;
-    flex-direction: column;
-    gap: 0.5rem;
   }
 
   .library-preview {
