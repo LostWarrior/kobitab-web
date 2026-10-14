@@ -554,20 +554,24 @@ h2 em {
 }
 
 .download-stack {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 0.5rem;
+  position: relative;
+}
+
+.hero-actions,
+.download-actions {
+  padding-bottom: 1.4rem;
 }
 
 .download-note {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  right: 0;
+  left: 0;
   color: var(--ink-muted);
   font-family: var(--font-mono);
   font-size: 0.68rem;
-}
-
-.hero-download-note {
-  margin-top: 0.6rem;
+  text-align: center;
+  white-space: nowrap;
 }
 
 .download-actions .download-note {
