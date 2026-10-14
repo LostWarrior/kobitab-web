@@ -553,6 +553,28 @@ h2 em {
   color: var(--moss);
 }
 
+.download-stack {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.download-note {
+  color: var(--ink-muted);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+}
+
+.hero-download-note {
+  margin-top: 0.6rem;
+}
+
+.download-actions .download-note {
+  color: inherit;
+  opacity: 0.75;
+}
+
 .hero-note {
   margin-top: 1rem;
   color: var(--ink-muted);
@@ -1171,6 +1193,7 @@ kbd {
   max-width: 760px;
   margin-top: 1rem;
   font-size: clamp(3rem, 5.5vw, 5.15rem);
+  line-height: 0.98;
 }
 
 .agents-intro h2 em {
@@ -2386,15 +2409,6 @@ kbd {
 .waitlist-status[data-tone="error"] {
   color: var(--danger);
   font-weight: 700;
-}
-
-.waitlist-note {
-  color: var(--ink-muted);
-  font-size: 0.63rem;
-}
-
-.waitlist-status:not(:empty) + .waitlist-note {
-  display: none;
 }
 
 .site-footer {

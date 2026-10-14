@@ -1,5 +1,4 @@
 import { initAgentShowcase } from './agent-showcase.js'
-import { detectMacArch, isMac } from './arch.js'
 import { buildWaitlistPayload, isValidWaitlistEmail, normalizeWaitlistEmail } from './waitlist.js'
 
 const repo = 'LostWarrior/Kobitab'
@@ -84,7 +83,6 @@ function setupAnalyticsTracking() {
       || lowerHref.endsWith('checksums.txt')
       || lowerHref.includes('/download/homebrew/')
       || link.id === 'download-dmg-link'
-      || link.id === 'download-dmg-link-intel'
 
     if (isDownload) {
       const filename = href.split('/').pop() || href || 'unknown'
@@ -163,50 +161,11 @@ function getCurrentHref(id) {
   return node?.getAttribute('href') || '#'
 }
 
-const archLinkIds = { arm64: 'download-dmg-link', x64: 'download-dmg-link-intel' }
-const archSecondaryLabels = { arm64: 'Apple Silicon Mac?', x64: 'Intel Mac?' }
-let activeArch = 'arm64'
-
-function syncLatestLink() {
-  const latest = document.getElementById('download-latest-link')
-  const primary = document.getElementById(archLinkIds[activeArch])
-  if (latest && primary) latest.setAttribute('href', primary.getAttribute('href') || '#')
-}
-
-function setDmgUrls(urls) {
-  for (const [arch, id] of Object.entries(archLinkIds)) {
-    const node = document.getElementById(id)
-    if (node && urls[arch]) {
-      node.setAttribute('href', toSafeUrl(urls[arch], getCurrentHref(id)))
-    }
+function setDmgUrl(url) {
+  if (!url) return
+  for (const id of ['download-dmg-link', 'download-latest-link']) {
+    document.getElementById(id)?.setAttribute('href', toSafeUrl(url, getCurrentHref(id)))
   }
-  syncLatestLink()
-}
-
-function applyArch(arch) {
-  if (arch === activeArch) return
-  const apple = document.getElementById(archLinkIds.arm64)
-  const intel = document.getElementById(archLinkIds.x64)
-  if (!apple || !intel) return
-
-  const [primary, secondary] = arch === 'x64' ? [intel, apple] : [apple, intel]
-  const [oldPrimary, oldSecondary] = activeArch === 'x64' ? [intel, apple] : [apple, intel]
-  const primaryClass = oldPrimary.className
-  const primaryHtml = oldPrimary.innerHTML
-  const secondaryClass = oldSecondary.className
-
-  primary.className = primaryClass
-  primary.innerHTML = primaryHtml
-  secondary.className = secondaryClass
-  secondary.textContent = archSecondaryLabels[arch === 'x64' ? 'arm64' : 'x64']
-  primary.parentNode.insertBefore(primary, secondary)
-  activeArch = arch
-  syncLatestLink()
-}
-
-async function setupArchDetection() {
-  if (!isMac()) return
-  applyArch(await detectMacArch())
 }
 
 function setChecksumsLink(url) {
@@ -225,8 +184,7 @@ function buildManifestAssets(manifest) {
       : null
   const assetEntries = [
     ['universalDmg', 'Universal DMG'],
-    ['arm64Dmg', 'Apple Silicon DMG'],
-    ['x64Dmg', 'Intel DMG']
+    ['arm64Dmg', 'Apple Silicon DMG']
   ]
 
   const items = []
@@ -250,10 +208,7 @@ async function hydrateReleaseAssets() {
       const manifest = await manifestRes.json()
       const modeKey = String(manifest.buildMode || 'unknown').toLowerCase()
       const manifestAssets = buildManifestAssets(manifest)
-      setDmgUrls({
-        arm64: manifestAssets.find((item) => item.name.toLowerCase().endsWith('arm64.dmg'))?.url,
-        x64: manifestAssets.find((item) => item.name.toLowerCase().endsWith('x64.dmg'))?.url
-      })
+      setDmgUrl(manifestAssets.find((item) => item.name.toLowerCase().endsWith('arm64.dmg'))?.url)
       setChecksumsLink(manifest.checksumsFile)
       setSigningBadge(modeKey)
       return
@@ -271,7 +226,7 @@ async function hydrateReleaseAssets() {
     const dmgFor = (suffix) =>
       assets.find((asset) => String(asset.name).toLowerCase().endsWith(suffix))?.browser_download_url
     const checksumsAsset = allAssets.find((asset) => String(asset.name).toLowerCase() === 'checksums.txt')
-    setDmgUrls({ arm64: dmgFor('arm64.dmg'), x64: dmgFor('x64.dmg') })
+    setDmgUrl(dmgFor('arm64.dmg'))
     setChecksumsLink(checksumsAsset?.browser_download_url)
     setSigningBadge('unknown')
   } catch {
@@ -724,7 +679,6 @@ function setupWaitlistForms() {
 
 function scheduleNonCriticalWork() {
   const run = () => {
-    void setupArchDetection()
     if (
       signingBadge
       || document.getElementById('download-dmg-link')

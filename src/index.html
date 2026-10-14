@@ -89,17 +89,15 @@
           <a id="download-dmg-link"
             href="https://downloads.kobitab.com/releases/v1.1.0/KobiTab-1.1.0-mac-arm64.dmg"
             class="button button-primary" data-analytics-location="hero">
-            Download preview
+            Download Preview
             <svg viewBox="0 0 18 18" aria-hidden="true">
               <path d="M4 9h10M10 5l4 4-4 4" fill="none" stroke="currentColor" stroke-linecap="round"
                 stroke-linejoin="round" stroke-width="1.7" />
             </svg>
           </a>
-          <a id="download-dmg-link-intel"
-            href="https://downloads.kobitab.com/releases/v1.1.0/KobiTab-1.1.0-mac-x64.dmg"
-            class="text-link" data-analytics-location="hero">Intel Mac?</a>
           <a class="text-link" href="#agents">Meet Kobi’s agents <span aria-hidden="true">↓</span></a>
         </div>
+        <p class="download-note hero-download-note">Only for Apple Silicon</p>
         <p class="hero-note">Free preview · Local-first library · You stay in control</p>
       </div>
 
@@ -451,11 +449,14 @@
           <h2>Give your memory<br><em>a better front door.</em></h2>
           <p>Download the free preview, or install it with Homebrew.</p>
           <div class="download-actions">
-            <a id="download-latest-link"
-              href="https://downloads.kobitab.com/releases/v1.1.0/KobiTab-1.1.0-mac-arm64.dmg"
-              class="button button-light" data-analytics-location="download">
-              Download for Mac
-            </a>
+            <div class="download-stack">
+              <a id="download-latest-link"
+                href="https://downloads.kobitab.com/releases/v1.1.0/KobiTab-1.1.0-mac-arm64.dmg"
+                class="button button-light" data-analytics-location="download">
+                Download Preview
+              </a>
+              <span class="download-note">Only for Apple Silicon</span>
+            </div>
             <button class="brew-command" type="button"
               data-copy-command="brew tap LostWarrior/kobitab &amp;&amp; brew install kobitab"
               aria-label="Copy Homebrew install command">
@@ -483,7 +484,6 @@
             </button>
           </div>
           <p class="waitlist-status" data-waitlist-status aria-live="polite"></p>
-          <p class="waitlist-note">Email plus minimal signup attribution. Nothing more.</p>
         </form>
       </div>
     </section>
