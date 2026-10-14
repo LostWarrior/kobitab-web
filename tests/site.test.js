@@ -89,6 +89,16 @@ test('comparison pages include honest verdicts and official source links', () =>
   assert.match(obsidian, /https:\/\/obsidian\.md\/help\/Obsidian%20Sync\/Security%20and%20privacy/)
 })
 
+test('hero download anchors keep the shape the release sync script rewrites', () => {
+  const html = read('src/index.html')
+  for (const [id, arch] of [['download-dmg-link', 'arm64'], ['download-dmg-link-intel', 'x64']]) {
+    const pattern = new RegExp(`(<a\\s+id="${id}"[\\s\\S]*?\\bhref=")([^"]+)(")`, 'm')
+    const match = html.match(pattern)
+    assert.ok(match, id)
+    assert.match(match[2], new RegExp(`^https://downloads\\.kobitab\\.com/releases/v[\\d.]+/KobiTab-[\\d.]+-mac-${arch}\\.dmg$`))
+  }
+})
+
 test('sitemap exposes the homepage, blog, and comparison routes', () => {
   const sitemap = read('src/sitemap.xml')
   for (const route of [
